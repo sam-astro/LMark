@@ -1,10 +1,14 @@
-
-# Header haha
-## Smaller Header haha
-
 .title This is a test title
 .author Samuel H.P.
+
+:content
+
+# Header haha
+
+## Smaller Header haha
+
 
 ? What is your name?
 
 # .title, written by .author
+

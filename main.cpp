@@ -15,6 +15,8 @@ string replaceVarInstances(string& str, map<string, string>& vars){
 	return str;
 }
 
+string fontSizes[] = {"\\Huge", "\\huge", "\\LARGE", "\\Large", "\\large"};
+
 int main(int argc, char** argv){
 	
 	string lMarkPath = "";
@@ -33,6 +35,8 @@ int main(int argc, char** argv){
 	std::string outFile;
 	std::map<std::string, std::string> variables;
 
+	outFile += "\\documentclass{article}\n";
+
 	std::string line;
 	while (std::getline(infile, line))
 	{
@@ -43,12 +47,17 @@ int main(int argc, char** argv){
 			outFile += trim(rangeInStr(line, 1, -1));
 		}
 		else if(line[0] == '.'){
-			variables[split(trim(line), ' ')[0]] = trim(rangeInStr(line, (split(trim(line), ' ')[0]).size(), -1)); 
+			variables[split(trim(line), ' ')[0]] = trim(rangeInStr(line, (split(trim(line), ' ')[0]).size(), trim(line).size()));
+			nospace = true;
+		}
+		else if(line[0] == ':'){
+			if(split(line, ' ')[0] == ":content")
+				outFile += "\\begin{document}";
 			nospace = true;
 		}
 		else if(line[0] == '#'){
 			int headingLevel = count(split(line, ' ')[0], '#');
-			outFile += trim(rangeInStr(line, 1, -1));
+			outFile += "\\section*{" + fontSizes[headingLevel] + "{" + trim(rangeInStr(line, headingLevel + 1, -1)) + "}}\n\\normalsize{}";
 		}
 		else{
 			outFile += line;
@@ -59,7 +68,9 @@ int main(int argc, char** argv){
 	}
 	infile.close();
 
-	std::ofstream out(lMarkPath + ".tex");
+	outFile += "\\end{document}";
+
+	std::ofstream out(split(lMarkPath, '.')[0] + ".tex");
     out << outFile;
     out.close();
 
