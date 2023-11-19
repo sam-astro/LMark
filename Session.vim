@@ -13,16 +13,17 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +60 main.cpp
-badd +187 strops.cpp
-badd +38 strops.h
+badd +78 main.cpp
+badd +165 strops.cpp
+badd +32 strops.h
 badd +1 term:///mnt/d/Code/LatexNotes//8472:/bin/bash
 badd +3 build.sh
-badd +8 test.lmark
+badd +21 test.lmark
 badd +2212 /mnt/d/Code/Astro8-Computer/Astro8-Emulator/main.cpp
-badd +1 term:///mnt/d/Code/LatexMarkdown//392:/bin/bash
+badd +2 term:///mnt/d/Code/LatexMarkdown//392:/bin/bash
 badd +28 ~/.config/nvim/init.vim
-badd +0 test.tex
+badd +1 test.tex
+badd +0 term:///mnt/d/Code/LatexMarkdown//5324:/bin/bash
 argglobal
 %argdel
 $argadd main.cpp
@@ -32,9 +33,26 @@ tabnew +setlocal\ bufhidden=wipe
 tabnew +setlocal\ bufhidden=wipe
 tabnew +setlocal\ bufhidden=wipe
 tabnew +setlocal\ bufhidden=wipe
-tabnew +setlocal\ bufhidden=wipe
 tabrewind
 edit main.cpp
+let s:save_splitbelow = &splitbelow
+let s:save_splitright = &splitright
+set splitbelow splitright
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
+let &splitbelow = s:save_splitbelow
+let &splitright = s:save_splitright
+wincmd t
+let s:save_winminheight = &winminheight
+let s:save_winminwidth = &winminwidth
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+exe '1resize ' . ((&lines * 38 + 23) / 46)
+exe '2resize ' . ((&lines * 4 + 23) / 46)
 argglobal
 setlocal fdm=expr
 setlocal fde=b:anyfold_ind_buffer[v:lnum-1]
@@ -46,39 +64,52 @@ setlocal fdn=20
 setlocal fen
 9
 normal! zo
-20
+11
 normal! zo
-41
+21
 normal! zo
-53
+42
 normal! zo
-let s:l = 60 - ((26 * winheight(0) + 19) / 39)
+46
+normal! zo
+57
+normal! zo
+67
+normal! zo
+95
+normal! zo
+107
+normal! zo
+let s:l = 85 - ((25 * winheight(0) + 19) / 38)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 60
-normal! 026|
-tabnext
+keepjumps 85
+normal! 034|
+wincmd w
 argglobal
-if bufexists(fnamemodify("term:///mnt/d/Code/LatexMarkdown//392:/bin/bash", ":p")) | buffer term:///mnt/d/Code/LatexMarkdown//392:/bin/bash | else | edit term:///mnt/d/Code/LatexMarkdown//392:/bin/bash | endif
+if bufexists(fnamemodify("term:///mnt/d/Code/LatexMarkdown//5324:/bin/bash", ":p")) | buffer term:///mnt/d/Code/LatexMarkdown//5324:/bin/bash | else | edit term:///mnt/d/Code/LatexMarkdown//5324:/bin/bash | endif
 if &buftype ==# 'terminal'
-  silent file term:///mnt/d/Code/LatexMarkdown//392:/bin/bash
+  silent file term:///mnt/d/Code/LatexMarkdown//5324:/bin/bash
 endif
-balt term:///mnt/d/Code/LatexNotes//8472:/bin/bash
+balt main.cpp
 setlocal fdm=manual
-setlocal fde=0
+setlocal fde=b:anyfold_ind_buffer[v:lnum-1]
 setlocal fmr={{{,}}}
 setlocal fdi=#
 setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 68 - ((38 * winheight(0) + 19) / 39)
+let s:l = 604 - ((3 * winheight(0) + 2) / 4)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 68
+keepjumps 604
 normal! 0
+wincmd w
+exe '1resize ' . ((&lines * 38 + 23) / 46)
+exe '2resize ' . ((&lines * 4 + 23) / 46)
 tabnext
 edit strops.h
 argglobal
@@ -91,12 +122,12 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 38 - ((18 * winheight(0) + 19) / 39)
+let s:l = 44 - ((25 * winheight(0) + 21) / 43)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 38
-normal! 047|
+keepjumps 44
+normal! 08|
 tabnext
 edit test.lmark
 argglobal
@@ -109,12 +140,12 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 4 - ((3 * winheight(0) + 19) / 39)
+let s:l = 21 - ((20 * winheight(0) + 21) / 43)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 4
-normal! 0
+keepjumps 21
+normal! 038|
 tabnext
 edit test.tex
 argglobal
@@ -127,11 +158,11 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 7 - ((6 * winheight(0) + 19) / 39)
+let s:l = 2 - ((1 * winheight(0) + 21) / 43)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 7
+keepjumps 2
 normal! 0
 tabnext
 edit ~/.config/nvim/init.vim
@@ -150,7 +181,7 @@ if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 28
-normal! 0111|
+normal! 04|
 tabnext
 edit strops.cpp
 argglobal
@@ -163,35 +194,125 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
+14
+normal! zo
+28
+normal! zo
+32
+normal! zo
+35
+normal! zo
+53
+normal! zo
+73
+normal! zo
+93
+normal! zo
+110
+normal! zo
 142
 normal! zo
-169
+151
 normal! zo
-172
+160
 normal! zo
-179
+176
 normal! zo
-182
+184
 normal! zo
-183
+203
 normal! zo
-198
+206
 normal! zo
-204
+213
 normal! zo
-292
+216
 normal! zo
-330
+217
+normal! zo
+232
+normal! zo
+241
+normal! zo
+258
+normal! zo
+264
+normal! zo
+277
+normal! zo
+284
+normal! zo
+313
+normal! zo
+320
+normal! zo
+327
+normal! zo
+338
+normal! zo
+343
+normal! zo
+352
+normal! zo
+358
+normal! zo
+371
+normal! zo
+373
+normal! zo
+380
+normal! zo
+382
+normal! zo
+383
+normal! zo
+390
+normal! zo
+393
+normal! zo
+400
+normal! zo
+409
+normal! zo
+412
+normal! zo
+416
+normal! zo
+426
+normal! zo
+429
+normal! zo
+434
+normal! zo
+446
+normal! zo
+458
+normal! zo
+470
+normal! zo
+482
 normal! zo
 485
 normal! zo
-let s:l = 199 - ((22 * winheight(0) + 13) / 27)
+495
+normal! zo
+511
+normal! zo
+517
+normal! zo
+519
+normal! zo
+545
+normal! zo
+547
+normal! zo
+let s:l = 165 - ((30 * winheight(0) + 21) / 43)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 199
-normal! 0
-tabnext 4
+keepjumps 165
+normal! 069|
+tabnext 1
 set stal=1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

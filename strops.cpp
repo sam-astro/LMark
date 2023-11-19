@@ -139,6 +139,40 @@ string trim(const string& s) {
 	return rtrim(ltrim(s));
 }
 
+vector<string> split(const string& str, const string& del) {
+	if (countStr(str, del) == 0)
+		return vector<string>{str};
+
+	// declaring temp string to store the curr "word" upto del
+	string temp = "";
+	vector<string> splitWords;
+	int j = 0;
+
+	for (int i = 0; i < (int)str.size(); i++)
+	{
+		// If cur char is not del, then append it to the cur "word", otherwise
+		// you have completed the word, print it, and start a new word.
+		if (str[i] != del[j])
+		{
+			temp += str[i];
+			j = 0;
+		}
+		else
+		{
+			j++;
+			temp += str[i];
+			if(j == del.size()){
+				splitWords.push_back(rangeInStr(temp, 0, temp.size()-del.size()));
+				temp = "";
+				j = 0;
+			}
+		}
+	}
+	splitWords.push_back(temp);
+
+	return splitWords;
+}
+
 vector<string> split(const string& str, const char& del) {
 	if (count(str, del) == 0)
 		return vector<string>{str};
@@ -176,13 +210,13 @@ int count(const string& str, const char& ch) {
 	return cnt;
 }
 
-int countStr(const string& str, const string& ch) {
+int countStr(const string& str, const string& sc) {
 	int cnt = 0;
 	int c2 = 0;
 	for (int i = 0; i < (int)str.size(); i++){
-		if (str[i] == ch[c2]){
+		if (str[i] == sc[c2]){
 			c2++;
-			if(c2 == (int)ch.size()-1){
+			if(c2 == (int)sc.size()){
 				cnt++;
 				c2 = 0;
 			}
@@ -193,6 +227,32 @@ int countStr(const string& str, const string& ch) {
 	}
 
 	return cnt;
+}
+
+string makeSectionsFromDelim(vector<string> splitStr, const string& sectionStart, const string& sectionEnd, bool startActive){
+	
+	string outFile = "";
+
+	int numEffect = splitStr.size()+1;
+	bool toggleEffect = startActive;
+	//if(startsWith(line, "**"))
+	//	toggleEffect = true;
+	int index = 0;
+	for(string& s : splitStr){
+		if(toggleEffect && index == 0){
+			outFile += sectionStart + s + sectionEnd;
+		}
+		else if(numEffect > 0 && toggleEffect){
+			outFile += sectionStart + s + sectionEnd;
+			numEffect--;
+		}
+		else
+			outFile += s;
+		index++;
+		toggleEffect = !toggleEffect;
+	}
+
+	return outFile;
 }
 
 int countNoOverlap(const string& str, const char& searchFor, const char& ch1, const char& ch2)
@@ -453,14 +513,14 @@ string replace(const string& str, const string& strToReplace, const string& repl
 	string savedLetters;
 
 	int sameLetters = 0;
-	int startReplaceIndex = 0;
+	//int startReplaceIndex = 0;
 	for (int i = 0; i < (int)str.size(); i++)
 	{
 		if (str[i] == strToReplace[sameLetters])
 		{
 			savedLetters += str[i];
-			if (sameLetters == 0)
-				startReplaceIndex = i;
+			//if (sameLetters == 0)
+			//	startReplaceIndex = i;
 			sameLetters++;
 
 			if ((int)strToReplace.size() == sameLetters)

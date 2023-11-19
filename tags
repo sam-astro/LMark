@@ -5,8 +5,8 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 0	Session.vim	/^normal! 0$/;"	m
-0113|	Session.vim	/^normal! 0113|$/;"	m
-028|	Session.vim	/^normal! 028|$/;"	m
+0111|	Session.vim	/^normal! 0111|$/;"	m
+026|	Session.vim	/^normal! 026|$/;"	m
 047|	Session.vim	/^normal! 047|$/;"	m
 Quoted	strops.cpp	/^string Quoted(const string& s)$/;"	f
 RMParenthesis	strops.cpp	/^string RMParenthesis(const string& s)$/;"	f
@@ -21,7 +21,7 @@ count	strops.cpp	/^int count(const string& str, const char& ch) {$/;"	f
 countInVector	strops.cpp	/^int countInVector(const vector<string>& str, const string& ch) {$/;"	f
 countNoOverlap	strops.cpp	/^int countNoOverlap(const string& str, const char& searchFor, const char& ch1, const char& ch2)$/;"	f
 countOutsideParenthesis	strops.cpp	/^int countOutsideParenthesis(const string& str, const char& searchFor)$/;"	f
-countStr	strops.cpp	/^int countStr(const string& str, const string& ch) {$/;"	f
+countStr	strops.cpp	/^int countStr(const string& str, const string& sc) {$/;"	f
 escaped	strops.cpp	/^std::string escaped(const std::string& input)$/;"	f
 floatval	strops.cpp	/^float floatval(const string& s)$/;"	f
 fontSizes	main.cpp	/^string fontSizes[] = {"\\\\Huge", "\\\\huge", "\\\\LARGE", "\\\\Large", "\\\\large"};$/;"	v
@@ -30,6 +30,7 @@ isEscaped	strops.cpp	/^bool isEscaped(const string& str, int curChar)$/;"	f
 isNumber	strops.cpp	/^bool isNumber(const string& str)$/;"	f
 ltrim	strops.cpp	/^string ltrim(const string& s)$/;"	f
 main	main.cpp	/^int main(int argc, char** argv){$/;"	f
+makeSectionsFromDelim	strops.cpp	/^string makeSectionsFromDelim(vector<string> splitStr, const string& sectionStart, const string& sectionEnd, bool startActive){$/;"	f
 rangeInStr	strops.cpp	/^string rangeInStr(const string& str, const int& min, int max) {$/;"	f
 rangeInVec	strops.cpp	/^vector<string> rangeInVec(const vector<string>& str, const int& min, int max) {$/;"	f
 removeTabs	strops.cpp	/^vector<string> removeTabs(const vector<string>& str, const int& amnt) {$/;"	f
@@ -37,17 +38,20 @@ removeTabsWdArry	strops.cpp	/^vector<vector<string>> removeTabsWdArry(const vect
 replace	strops.cpp	/^string replace(const string& str, const string& strToReplace, const string& replaceWith) {$/;"	f
 replaceVarInstances	main.cpp	/^string replaceVarInstances(string& str, map<string, string>& vars){$/;"	f
 rtrim	strops.cpp	/^string rtrim(const string& s)$/;"	f
-s:l	Session.vim	/^let s:l = 1 - ((0 * winheight(0) + 13) \/ 27)$/;"	v
-s:l	Session.vim	/^let s:l = 10 - ((4 * winheight(0) + 13) \/ 27)$/;"	v
 s:l	Session.vim	/^let s:l = 199 - ((22 * winheight(0) + 13) \/ 27)$/;"	v
-s:l	Session.vim	/^let s:l = 38 - ((12 * winheight(0) + 13) \/ 27)$/;"	v
-s:l	Session.vim	/^let s:l = 46 - ((15 * winheight(0) + 13) \/ 27)$/;"	v
+s:l	Session.vim	/^let s:l = 28 - ((14 * winheight(0) + 13) \/ 27)$/;"	v
+s:l	Session.vim	/^let s:l = 38 - ((18 * winheight(0) + 19) \/ 39)$/;"	v
+s:l	Session.vim	/^let s:l = 4 - ((3 * winheight(0) + 19) \/ 39)$/;"	v
+s:l	Session.vim	/^let s:l = 60 - ((26 * winheight(0) + 19) \/ 39)$/;"	v
+s:l	Session.vim	/^let s:l = 68 - ((38 * winheight(0) + 19) \/ 39)$/;"	v
+s:l	Session.vim	/^let s:l = 7 - ((6 * winheight(0) + 19) \/ 39)$/;"	v
 s:shortmess_save	Session.vim	/^let s:shortmess_save = &shortmess$/;"	v
 s:so_save	Session.vim	/^let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1$/;"	v
 s:sx	Session.vim	/^let s:sx = expand("<sfile>:p:r")."x.vim"$/;"	v
 s:wipebuf	Session.vim	/^  let s:wipebuf = bufnr('%')$/;"	v
 slice	strops.cpp	/^vector<string> slice(vector<string> const& v, int min, int max)$/;"	f
 split	strops.cpp	/^vector<string> split(const string& str, const char& del) {$/;"	f
+split	strops.cpp	/^vector<string> split(const string& str, const string& del) {$/;"	f
 splitNoOverlap	strops.cpp	/^vector<string> splitNoOverlap(const string& str, const char& splitBy, const char& openChar, const char& closeChar)$/;"	f
 startsWith	strops.cpp	/^bool startsWith(const string& str, const string& lookFor)$/;"	f
 stob	strops.cpp	/^bool stob(const string& str)$/;"	f

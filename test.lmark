@@ -1,12 +1,29 @@
 .title This is a test title
 .author Samuel H.P.
+.uuu This is my name. Not.
 
 :content
 
 # Header haha
 
-## Smaller Header haha
+## Another
 
+### Smaller Header haha
+
+#### Hooray
+
+oooo ya
+
+test .uuu
+
+this is a test sentence **with bold** and **other bold** as well as *italisized areas*
+
+It also might work with ***both *bold* and italic***
+
+testagain
+
+another one
+$E=mc^2$ as well as $i => \inf$
 
 ? What is your name?
 

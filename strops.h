@@ -29,6 +29,8 @@ string trim(const string& s);
 
 vector<string> split(const string& str, const char& del);
 
+vector<string> split(const string& str, const string& del);
+
 string betweenChars(const string& str, const char& openChar, const char& closeChar);
 
 vector<string> splitNoOverlap(const string& str, const char& splitBy, const char& openChar, const char& closeChar);
@@ -38,6 +40,8 @@ int count(const string& str, const char& ch);
 int countStr(const string& str, const string& ch);
 
 int countNoOverlap(const string& str, const char& searchFor, const char& ch1, const char& ch2);
+
+string makeSectionsFromDelim(vector<string> splitStr, const string& sectionStart, const string& sectionEnd, bool startActive);
 
 int countOutsideParenthesis(const string& str, const char& searchFor);
 
