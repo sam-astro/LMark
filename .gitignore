@@ -1,5 +1,10 @@
 # Prerequisites
 *.d
+*.log
+*.aux
+*.fdb_latexmk
+*.fls
+*.tex
 
 # Compiled Object files
 *.slo
