@@ -35,6 +35,11 @@ int main(int argc, char** argv){
 
 	std::string outFile;
 	std::map<std::string, std::string> variables;
+	variables[".sqrt"] = "\\sqrt";
+	variables[".frac"] = "\\frac";
+	variables[".f"] = "\\frac";
+	variables[".sum"] = "\\sum";
+	variables[".E"] = "\\sum";
 
 	outFile += "\\documentclass{article}\n";
 

@@ -17,3 +17,5 @@ You can very easily write **Markdown** style text, which is compiled into **LaTe
 Equation:
 
 $$E^3=mF+b$$
+$$.E{}E^3=mF+b$$
+$$.f{x+5}{2+x^7}$$
