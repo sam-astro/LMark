@@ -1,0 +1,19 @@
+.title LMark Documentation
+.author sam-astro
+
+:content
+
+# .title
+
+### By .author
+
+
+This is the documentation for *LMark*, written in *LMark*.
+
+You can very easily write **Markdown** style text, which is compiled into **LaTeX** to allow for extreme customizability, but maintaining the simplicity of **Markdown** to allow for very fast note-taking.
+
+* This is a bullet point
+
+Equation:
+
+$$E^3=mF+b$$

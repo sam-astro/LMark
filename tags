@@ -5,16 +5,18 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 0	Session.vim	/^normal! 0$/;"	m
-0111|	Session.vim	/^normal! 0111|$/;"	m
-026|	Session.vim	/^normal! 026|$/;"	m
-047|	Session.vim	/^normal! 047|$/;"	m
+034|	Session.vim	/^normal! 034|$/;"	m
+038|	Session.vim	/^normal! 038|$/;"	m
+04|	Session.vim	/^normal! 04|$/;"	m
+069|	Session.vim	/^normal! 069|$/;"	m
+08|	Session.vim	/^normal! 08|$/;"	m
 Quoted	strops.cpp	/^string Quoted(const string& s)$/;"	f
 RMParenthesis	strops.cpp	/^string RMParenthesis(const string& s)$/;"	f
 STROPS_H	strops.h	2;"	d
 SessionLoad	Session.vim	/^let SessionLoad = 1$/;"	v
 StringRaw	strops.cpp	/^string StringRaw(const string& s)$/;"	f
 Vec2Str	strops.cpp	/^string Vec2Str(const vector<string>& str) {$/;"	f
-WHITESPACE	strops.cpp	/^const string WHITESPACE = " \\t\\f";$/;"	v
+WHITESPACE	strops.cpp	/^const string WHITESPACE = " \\t\\f\\n";$/;"	v
 betweenChars	strops.cpp	/^string betweenChars(const string& str, const char& openChar, const char& closeChar)$/;"	f
 charIndexInVec	strops.cpp	/^int charIndexInVec(const vector<string>& str, const char& ch) {$/;"	f
 count	strops.cpp	/^int count(const string& str, const char& ch) {$/;"	f
@@ -38,13 +40,17 @@ removeTabsWdArry	strops.cpp	/^vector<vector<string>> removeTabsWdArry(const vect
 replace	strops.cpp	/^string replace(const string& str, const string& strToReplace, const string& replaceWith) {$/;"	f
 replaceVarInstances	main.cpp	/^string replaceVarInstances(string& str, map<string, string>& vars){$/;"	f
 rtrim	strops.cpp	/^string rtrim(const string& s)$/;"	f
-s:l	Session.vim	/^let s:l = 199 - ((22 * winheight(0) + 13) \/ 27)$/;"	v
+s:l	Session.vim	/^let s:l = 165 - ((30 * winheight(0) + 21) \/ 43)$/;"	v
+s:l	Session.vim	/^let s:l = 2 - ((1 * winheight(0) + 21) \/ 43)$/;"	v
+s:l	Session.vim	/^let s:l = 21 - ((20 * winheight(0) + 21) \/ 43)$/;"	v
 s:l	Session.vim	/^let s:l = 28 - ((14 * winheight(0) + 13) \/ 27)$/;"	v
-s:l	Session.vim	/^let s:l = 38 - ((18 * winheight(0) + 19) \/ 39)$/;"	v
-s:l	Session.vim	/^let s:l = 4 - ((3 * winheight(0) + 19) \/ 39)$/;"	v
-s:l	Session.vim	/^let s:l = 60 - ((26 * winheight(0) + 19) \/ 39)$/;"	v
-s:l	Session.vim	/^let s:l = 68 - ((38 * winheight(0) + 19) \/ 39)$/;"	v
-s:l	Session.vim	/^let s:l = 7 - ((6 * winheight(0) + 19) \/ 39)$/;"	v
+s:l	Session.vim	/^let s:l = 44 - ((25 * winheight(0) + 21) \/ 43)$/;"	v
+s:l	Session.vim	/^let s:l = 604 - ((3 * winheight(0) + 2) \/ 4)$/;"	v
+s:l	Session.vim	/^let s:l = 85 - ((25 * winheight(0) + 19) \/ 38)$/;"	v
+s:save_splitbelow	Session.vim	/^let s:save_splitbelow = &splitbelow$/;"	v
+s:save_splitright	Session.vim	/^let s:save_splitright = &splitright$/;"	v
+s:save_winminheight	Session.vim	/^let s:save_winminheight = &winminheight$/;"	v
+s:save_winminwidth	Session.vim	/^let s:save_winminwidth = &winminwidth$/;"	v
 s:shortmess_save	Session.vim	/^let s:shortmess_save = &shortmess$/;"	v
 s:so_save	Session.vim	/^let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1$/;"	v
 s:sx	Session.vim	/^let s:sx = expand("<sfile>:p:r")."x.vim"$/;"	v

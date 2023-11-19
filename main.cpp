@@ -41,6 +41,7 @@ int main(int argc, char** argv){
 	std::string line;
 	while (std::getline(infile, line))
 	{
+		line += " ";
 		string oldline = line;
 		line = trim(replaceVarInstances(line, variables));
 		bool nospace = false;

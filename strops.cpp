@@ -7,7 +7,7 @@
 //#include "builtin.h"
 using namespace std;
 
-const string WHITESPACE = " \t\f";
+const string WHITESPACE = " \t\f\n";
 //const string WHITESPACE = " \n\r\t\f\v";
 
 
