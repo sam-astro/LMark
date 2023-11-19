@@ -5,10 +5,11 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 0	Session.vim	/^normal! 0$/;"	m
+010|	Session.vim	/^normal! 010|$/;"	m
 034|	Session.vim	/^normal! 034|$/;"	m
 038|	Session.vim	/^normal! 038|$/;"	m
-04|	Session.vim	/^normal! 04|$/;"	m
-069|	Session.vim	/^normal! 069|$/;"	m
+047|	Session.vim	/^normal! 047|$/;"	m
+05|	Session.vim	/^normal! 05|$/;"	m
 08|	Session.vim	/^normal! 08|$/;"	m
 Quoted	strops.cpp	/^string Quoted(const string& s)$/;"	f
 RMParenthesis	strops.cpp	/^string RMParenthesis(const string& s)$/;"	f
@@ -40,13 +41,14 @@ removeTabsWdArry	strops.cpp	/^vector<vector<string>> removeTabsWdArry(const vect
 replace	strops.cpp	/^string replace(const string& str, const string& strToReplace, const string& replaceWith) {$/;"	f
 replaceVarInstances	main.cpp	/^string replaceVarInstances(string& str, map<string, string>& vars){$/;"	f
 rtrim	strops.cpp	/^string rtrim(const string& s)$/;"	f
-s:l	Session.vim	/^let s:l = 165 - ((30 * winheight(0) + 21) \/ 43)$/;"	v
-s:l	Session.vim	/^let s:l = 2 - ((1 * winheight(0) + 21) \/ 43)$/;"	v
+s:l	Session.vim	/^let s:l = 1 - ((0 * winheight(0) + 21) \/ 43)$/;"	v
+s:l	Session.vim	/^let s:l = 10 - ((9 * winheight(0) + 21) \/ 43)$/;"	v
+s:l	Session.vim	/^let s:l = 19 - ((18 * winheight(0) + 21) \/ 43)$/;"	v
 s:l	Session.vim	/^let s:l = 21 - ((20 * winheight(0) + 21) \/ 43)$/;"	v
-s:l	Session.vim	/^let s:l = 28 - ((14 * winheight(0) + 13) \/ 27)$/;"	v
+s:l	Session.vim	/^let s:l = 28 - ((22 * winheight(0) + 21) \/ 43)$/;"	v
+s:l	Session.vim	/^let s:l = 43 - ((13 * winheight(0) + 19) \/ 38)$/;"	v
 s:l	Session.vim	/^let s:l = 44 - ((25 * winheight(0) + 21) \/ 43)$/;"	v
-s:l	Session.vim	/^let s:l = 604 - ((3 * winheight(0) + 2) \/ 4)$/;"	v
-s:l	Session.vim	/^let s:l = 85 - ((25 * winheight(0) + 19) \/ 38)$/;"	v
+s:l	Session.vim	/^let s:l = 89 - ((3 * winheight(0) + 2) \/ 4)$/;"	v
 s:save_splitbelow	Session.vim	/^let s:save_splitbelow = &splitbelow$/;"	v
 s:save_splitright	Session.vim	/^let s:save_splitright = &splitright$/;"	v
 s:save_winminheight	Session.vim	/^let s:save_winminheight = &winminheight$/;"	v

@@ -2,7 +2,6 @@
 *.d
 *.log
 *.aux
-*.fdb_latexmk
 *.fls
 *.tex
 
@@ -35,3 +34,4 @@
 *.exe
 *.out
 *.app
+*.fdb_latexmk
