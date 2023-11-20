@@ -19,3 +19,12 @@ Equation:
 $$E^3=mF+b$$
 $$.E{}E^3=mF+b$$
 $$.f{x+5}{2+x^7}$$
+
+
+These can be written in standard .latex style, like so:
+
+```
+$$E^3=mF+b$$
+$$.E{}E^3=mF+b$$
+$$.f{x+5}{2+x^7}$$
+```
