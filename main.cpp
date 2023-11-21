@@ -40,6 +40,11 @@ int main(int argc, char** argv){
 	variables[".f"] = "\\frac";
 	variables[".sum"] = "\\sum";
 	variables[".E"] = "\\sum";
+	variables[".latex"] = "\\LaTeX{}";
+	variables["-->"] = "\\rightarrow{}";
+	variables["<--"] = "\\leftarrow{}";
+	variables["==>"] = "\\Rightarrow{}";
+	variables["<=="] = "\\Leftarrow{}";
 
 	outFile += "\\documentclass{article}\n";
 
@@ -63,7 +68,8 @@ int main(int argc, char** argv){
 			else if(line[0] == ':'){
 				if(split(line, ' ')[0] == ":content")
 					outFile += "\\begin{document}";
-				nospace = true;
+				else if(split(line, ':')[1] == ":pkg")
+					outFile += "\\usepackage{" + split(line, ':')[2] + "}";
 			}
 			else if(line[0] == '#'){
 				int headingLevel = count(split(line, ' ')[0], '#');
@@ -71,47 +77,67 @@ int main(int argc, char** argv){
 			}
 			// normal text, do processing
 			else{
-				int numBold = countStr(line, "**");
-				vector<string> splitBold = split(line, "**");
-				if(numBold > 0){
-					printf("\tboldsections: %d, %d\n", numBold, splitBold.size());
+				// Check for bold text modifier
+				int symbolInstances = countStr(line, "**");
+				vector<string> splitSymbolSections = split(line, "**");
+				if(symbolInstances > 0){
+					printf("\tboldsections: %d, %d\n", symbolInstances, splitSymbolSections.size());
 					printf("\t\t- line after edits: \"%s\"\n", line.c_str());
 				}
 				bool toggleEffect = false;
 				if(startsWith(line, "**"))
 					toggleEffect = true;
 				
-				line = makeSectionsFromDelim(splitBold, "\\textbf{", "}", toggleEffect);
+				line = makeSectionsFromDelim(splitSymbolSections, "\\textbf{", "}", toggleEffect);
+				
 				
 
-				int numItalic = countStr(line, "*");
-				vector<string> splitItalic = split(line, "*");
-				if(numItalic > 0){
-					printf("\titalicsections: %d, %d\n", numItalic, splitItalic.size());
+				// Check for underline text modifier
+				symbolInstances = countStr(line, "_");
+				splitSymbolSections = split(line, "_");
+				if(symbolInstances > 0){
+					printf("\tunderlinedsections: %d, %d\n", symbolInstances, splitSymbolSections.size());
+					printf("\t\t- line after edits: \"%s\"\n", line.c_str());
+				}
+				toggleEffect = false;
+				if(startsWith(line, "_"))
+					toggleEffect = true;
+
+				line = makeSectionsFromDelim(splitSymbolSections, "\\underline{", "}", toggleEffect);
+
+				
+
+				// Check for italic text modifier
+				symbolInstances = countStr(line, "*");
+				splitSymbolSections = split(line, "*");
+				if(symbolInstances > 0){
+					printf("\titalicsections: %d, %d\n", symbolInstances, splitSymbolSections.size());
 					printf("\t\t- line after edits: \"%s\"\n", line.c_str());
 				}
 				toggleEffect = false;
 				if(startsWith(line, "*"))
 					toggleEffect = true;
 
-				line = makeSectionsFromDelim(splitItalic, "\\textit{", "}", toggleEffect);
+				line = makeSectionsFromDelim(splitSymbolSections, "\\textit{", "}", toggleEffect);
 
+
+
+				// Check for code text modifier
+				symbolInstances = countStr(line, "`");
+				splitSymbolSections = split(line, "`");
+				if(symbolInstances > 0){
+					printf("\tcodesections: %d, %d\n", symbolInstances, splitSymbolSections.size());
+					printf("\t\t- line after edits: \"%s\"\n", line.c_str());
+				}
+				toggleEffect = false;
+				if(startsWith(line, "`"))
+					toggleEffect = true;
+
+				line = makeSectionsFromDelim(splitSymbolSections, "\\texttt{", "}", toggleEffect);
+
+
+				// Finally add the edited line to the output string
 				outFile += line;
-		//		int index = 0;
-		//		for(string& s : splitBold){
-		//			if(toggleEffect && index == 0){
-		//				outFile += "\\textbf{" + s + "}";
-		//				startBold = true;
-		//			}
-		//			else if(numBold > 0 && toggleEffect){
-		//				outFile += "\\textbf{" + s + "}";
-		//				numBold--;
-		//			}
-		//			else
-		//				outFile += s;
-		//			index++;
-		//			toggleEffect = !toggleEffect;
-		//		}
 			}
 
 		if(!nospace)

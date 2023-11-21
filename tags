@@ -5,10 +5,8 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 0	Session.vim	/^normal! 0$/;"	m
-010|	Session.vim	/^normal! 010|$/;"	m
 034|	Session.vim	/^normal! 034|$/;"	m
-038|	Session.vim	/^normal! 038|$/;"	m
-047|	Session.vim	/^normal! 047|$/;"	m
+056|	Session.vim	/^normal! 056|$/;"	m
 05|	Session.vim	/^normal! 05|$/;"	m
 08|	Session.vim	/^normal! 08|$/;"	m
 Quoted	strops.cpp	/^string Quoted(const string& s)$/;"	f
@@ -43,12 +41,11 @@ replaceVarInstances	main.cpp	/^string replaceVarInstances(string& str, map<strin
 rtrim	strops.cpp	/^string rtrim(const string& s)$/;"	f
 s:l	Session.vim	/^let s:l = 1 - ((0 * winheight(0) + 21) \/ 43)$/;"	v
 s:l	Session.vim	/^let s:l = 10 - ((9 * winheight(0) + 21) \/ 43)$/;"	v
-s:l	Session.vim	/^let s:l = 19 - ((18 * winheight(0) + 21) \/ 43)$/;"	v
-s:l	Session.vim	/^let s:l = 21 - ((20 * winheight(0) + 21) \/ 43)$/;"	v
 s:l	Session.vim	/^let s:l = 28 - ((22 * winheight(0) + 21) \/ 43)$/;"	v
+s:l	Session.vim	/^let s:l = 4 - ((3 * winheight(0) + 2) \/ 4)$/;"	v
 s:l	Session.vim	/^let s:l = 43 - ((13 * winheight(0) + 19) \/ 38)$/;"	v
 s:l	Session.vim	/^let s:l = 44 - ((25 * winheight(0) + 21) \/ 43)$/;"	v
-s:l	Session.vim	/^let s:l = 89 - ((3 * winheight(0) + 2) \/ 4)$/;"	v
+s:l	Session.vim	/^let s:l = 61 - ((42 * winheight(0) + 21) \/ 43)$/;"	v
 s:save_splitbelow	Session.vim	/^let s:save_splitbelow = &splitbelow$/;"	v
 s:save_splitright	Session.vim	/^let s:save_splitright = &splitright$/;"	v
 s:save_winminheight	Session.vim	/^let s:save_winminheight = &winminheight$/;"	v
