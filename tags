@@ -5,10 +5,9 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 0	Session.vim	/^normal! 0$/;"	m
-034|	Session.vim	/^normal! 034|$/;"	m
-056|	Session.vim	/^normal! 056|$/;"	m
-05|	Session.vim	/^normal! 05|$/;"	m
-08|	Session.vim	/^normal! 08|$/;"	m
+025|	Session.vim	/^normal! 025|$/;"	m
+036|	Session.vim	/^normal! 036|$/;"	m
+046|	Session.vim	/^normal! 046|$/;"	m
 Quoted	strops.cpp	/^string Quoted(const string& s)$/;"	f
 RMParenthesis	strops.cpp	/^string RMParenthesis(const string& s)$/;"	f
 STROPS_H	strops.h	2;"	d
@@ -39,13 +38,15 @@ removeTabsWdArry	strops.cpp	/^vector<vector<string>> removeTabsWdArry(const vect
 replace	strops.cpp	/^string replace(const string& str, const string& strToReplace, const string& replaceWith) {$/;"	f
 replaceVarInstances	main.cpp	/^string replaceVarInstances(string& str, map<string, string>& vars){$/;"	f
 rtrim	strops.cpp	/^string rtrim(const string& s)$/;"	f
-s:l	Session.vim	/^let s:l = 1 - ((0 * winheight(0) + 21) \/ 43)$/;"	v
-s:l	Session.vim	/^let s:l = 10 - ((9 * winheight(0) + 21) \/ 43)$/;"	v
-s:l	Session.vim	/^let s:l = 28 - ((22 * winheight(0) + 21) \/ 43)$/;"	v
-s:l	Session.vim	/^let s:l = 4 - ((3 * winheight(0) + 2) \/ 4)$/;"	v
-s:l	Session.vim	/^let s:l = 43 - ((13 * winheight(0) + 19) \/ 38)$/;"	v
-s:l	Session.vim	/^let s:l = 44 - ((25 * winheight(0) + 21) \/ 43)$/;"	v
-s:l	Session.vim	/^let s:l = 61 - ((42 * winheight(0) + 21) \/ 43)$/;"	v
+s:l	Session.vim	/^let s:l = 1 - ((0 * winheight(0) + 13) \/ 27)$/;"	v
+s:l	Session.vim	/^let s:l = 27 - ((26 * winheight(0) + 13) \/ 27)$/;"	v
+s:l	Session.vim	/^let s:l = 28 - ((14 * winheight(0) + 13) \/ 27)$/;"	v
+s:l	Session.vim	/^let s:l = 33 - ((28 * winheight(0) + 20) \/ 41)$/;"	v
+s:l	Session.vim	/^let s:l = 338 - ((20 * winheight(0) + 20) \/ 41)$/;"	v
+s:l	Session.vim	/^let s:l = 37 - ((36 * winheight(0) + 20) \/ 41)$/;"	v
+s:l	Session.vim	/^let s:l = 493 - ((1 * winheight(0) + 2) \/ 4)$/;"	v
+s:l	Session.vim	/^let s:l = 71 - ((23 * winheight(0) + 18) \/ 36)$/;"	v
+s:l	Session.vim	/^let s:l = 74 - ((36 * winheight(0) + 20) \/ 41)$/;"	v
 s:save_splitbelow	Session.vim	/^let s:save_splitbelow = &splitbelow$/;"	v
 s:save_splitright	Session.vim	/^let s:save_splitright = &splitright$/;"	v
 s:save_winminheight	Session.vim	/^let s:save_winminheight = &winminheight$/;"	v
