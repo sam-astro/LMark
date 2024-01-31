@@ -11,9 +11,70 @@ string replaceVarInstances(string& str, map<string, string>& vars){
 	if(vars.size() > 0)
 		for (const auto & [key, value] : vars)
 		{
-			str = replace(str, key, value);
+			str = replaceIfOneWord(str, key, value);
 		}
 	return str;
+}
+
+void processNormalLine(string& line){
+
+	// Check for bold text modifier
+	int symbolInstances = countStr(line, "**");
+	vector<string> splitSymbolSections = split(line, "**");
+	if(symbolInstances > 0){
+		printf("\tboldsections: %d, %d\n", symbolInstances, splitSymbolSections.size());
+		printf("\t\t- line after edits: \"%s\"\n", line.c_str());
+	}
+	bool toggleEffect = false;
+	if(startsWith(line, "**"))
+		toggleEffect = true;
+	
+	line = makeSectionsFromDelim(splitSymbolSections, "\\textbf{", "}", toggleEffect);
+	
+	
+
+	// Check for underline text modifier
+	symbolInstances = countStr(line, "_");
+	splitSymbolSections = split(line, "_");
+	if(symbolInstances > 0){
+		printf("\tunderlinedsections: %d, %d\n", symbolInstances, splitSymbolSections.size());
+		printf("\t\t- line after edits: \"%s\"\n", line.c_str());
+	}
+	toggleEffect = false;
+	if(startsWith(line, "_"))
+		toggleEffect = true;
+
+	line = makeSectionsFromDelim(splitSymbolSections, "\\underline{", "}", toggleEffect);
+
+	
+
+	// Check for italic text modifier
+	symbolInstances = countStr(line, "*");
+	splitSymbolSections = split(line, "*");
+	if(symbolInstances > 0){
+		printf("\titalicsections: %d, %d\n", symbolInstances, splitSymbolSections.size());
+		printf("\t\t- line after edits: \"%s\"\n", line.c_str());
+	}
+	toggleEffect = false;
+	if(startsWith(line, "*"))
+		toggleEffect = true;
+
+	line = makeSectionsFromDelim(splitSymbolSections, "\\textit{", "}", toggleEffect);
+
+
+
+	// Check for code text modifier
+	symbolInstances = countStr(line, "`");
+	splitSymbolSections = split(line, "`");
+	if(symbolInstances > 0){
+		printf("\tcodesections: %d, %d\n", symbolInstances, splitSymbolSections.size());
+		printf("\t\t- line after edits: \"%s\"\n", line.c_str());
+	}
+	toggleEffect = false;
+	if(startsWith(line, "`"))
+		toggleEffect = true;
+
+	line = makeSectionsFromDelim(splitSymbolSections, "\\texttt{", "}", toggleEffect);
 }
 
 string fontSizes[] = {"\\Huge", "\\huge", "\\LARGE", "\\Large", "\\large"};
@@ -41,15 +102,20 @@ int main(int argc, char** argv){
 	variables[".sum"] = "\\sum";
 	variables[".E"] = "\\sum";
 	variables[".latex"] = "\\LaTeX{}";
+	variables[".hrfull"] = "\\noindent \\makebox[\\linewidth]{\\rule{\\paperwidth}{0.4pt}}";
+	variables[".hrhalf"] = "\\noindent \\makebox[\\linewidth]{\\rule{15cm}{0.4pt}}";
+	variables[".filename"] = replace(capitalize(split(lMarkPath, '.')[0]), "_", " ");
 	variables["-->"] = "$\\rightarrow$";
 	variables["<--"] = "$\\leftarrow$";
 	variables["==>"] = "$\\Rightarrow$";
 	variables["<=="] = "$\\Leftarrow$";
 
-	outFile += "\\documentclass{article}\n\\usepackage{listings}\n";
+	outFile += "\\documentclass{article}\n";
+	//outFile += "\\documentclass{article}\n\\usepackage{listings}\n";
 
 
 	bool openCode = false;
+	bool openList = false;
 
 	std::string line;
 	while (std::getline(infile, line))
@@ -58,10 +124,17 @@ int main(int argc, char** argv){
 		string oldline = line;
 
 		if(!openCode)
-			line = trim(replaceVarInstances(line, variables));
+			line = replaceVarInstances(line, variables);
 
 		bool nospace = false;
 
+		if(line.length()<= 1){
+				outFile += '\n';
+			continue;
+		}
+		
+		
+		// Look for other leading character modifiers
 		if(line[0] == '?'){
 			outFile += trim(rangeInStr(line, 1, -1));
 		}
@@ -74,8 +147,16 @@ int main(int argc, char** argv){
 		else if(line[0] == ':'){
 			if(split(line, ' ')[0] == ":content")
 				outFile += "\\begin{document}";
-			else if(split(line, ':')[1] == ":pkg")
+			else if(split(line, ':')[1] == "pkg")
 				outFile += "\\usepackage{" + split(line, ':')[2] + "}";
+		}
+		else if(startsWith(line, "* ")){
+			if(!openList){
+				outFile += "\\begin{itemize}\n";
+				openList = !openList;
+			}
+			processNormalLine(line);
+			outFile += "\\item " + line;
 		}
 		else if(startsWith(line, "```")){
 			if(openCode){
@@ -92,66 +173,19 @@ int main(int argc, char** argv){
 		}
 		// normal text, do processing
 		else{
-			// Check for bold text modifier
-			int symbolInstances = countStr(line, "**");
-			vector<string> splitSymbolSections = split(line, "**");
-			if(symbolInstances > 0){
-				printf("\tboldsections: %d, %d\n", symbolInstances, splitSymbolSections.size());
-				printf("\t\t- line after edits: \"%s\"\n", line.c_str());
+			// Stop list if open
+			if(openList){
+				outFile += "\\end{itemize}\n";
+				openList = !openList;
 			}
-			bool toggleEffect = false;
-			if(startsWith(line, "**"))
-				toggleEffect = true;
-			
-			line = makeSectionsFromDelim(splitSymbolSections, "\\textbf{", "}", toggleEffect);
-			
-			
 
-			// Check for underline text modifier
-			symbolInstances = countStr(line, "_");
-			splitSymbolSections = split(line, "_");
-			if(symbolInstances > 0){
-				printf("\tunderlinedsections: %d, %d\n", symbolInstances, splitSymbolSections.size());
-				printf("\t\t- line after edits: \"%s\"\n", line.c_str());
+			// Add indent if tab char, don't if no tab char
+			if(line[0] != '\t' && line[0] != ' ' && line[0] != '\\'){
+				outFile += "\\noindent ";
 			}
-			toggleEffect = false;
-			if(startsWith(line, "_"))
-				toggleEffect = true;
-
-			line = makeSectionsFromDelim(splitSymbolSections, "\\underline{", "}", toggleEffect);
-
-			
-
-			// Check for italic text modifier
-			symbolInstances = countStr(line, "*");
-			splitSymbolSections = split(line, "*");
-			if(symbolInstances > 0){
-				printf("\titalicsections: %d, %d\n", symbolInstances, splitSymbolSections.size());
-				printf("\t\t- line after edits: \"%s\"\n", line.c_str());
-			}
-			toggleEffect = false;
-			if(startsWith(line, "*"))
-				toggleEffect = true;
-
-			line = makeSectionsFromDelim(splitSymbolSections, "\\textit{", "}", toggleEffect);
-
-
-
-			// Check for code text modifier
-			symbolInstances = countStr(line, "`");
-			splitSymbolSections = split(line, "`");
-			if(symbolInstances > 0){
-				printf("\tcodesections: %d, %d\n", symbolInstances, splitSymbolSections.size());
-				printf("\t\t- line after edits: \"%s\"\n", line.c_str());
-			}
-			toggleEffect = false;
-			if(startsWith(line, "`"))
-				toggleEffect = true;
-
-			line = makeSectionsFromDelim(splitSymbolSections, "\\texttt{", "}", toggleEffect);
-
 
 			// Finally add the edited line to the output string
+			processNormalLine(line);
 			outFile += line;
 		}
 

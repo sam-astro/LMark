@@ -69,10 +69,14 @@ float floatval(const string& s);
 
 string replace(const string& str, const string& strToReplace, const string& replaceWith);
 
+string replaceIfOneWord(const string& str, const string& strToReplace, const string& replaceWith);
+
 bool isEscaped(const string& str, int curChar);
 
 bool startsWith(const string& str, const string& lookFor);
 
 std::string escaped(const std::string& input);
+
+std::string capitalize(const std::string& input);
 
 #endif

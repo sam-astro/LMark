@@ -16,6 +16,7 @@ StringRaw	strops.cpp	/^string StringRaw(const string& s)$/;"	f
 Vec2Str	strops.cpp	/^string Vec2Str(const vector<string>& str) {$/;"	f
 WHITESPACE	strops.cpp	/^const string WHITESPACE = " \\t\\f\\n";$/;"	v
 betweenChars	strops.cpp	/^string betweenChars(const string& str, const char& openChar, const char& closeChar)$/;"	f
+capitalize	strops.cpp	/^std::string capitalize(const std::string& input)$/;"	f
 charIndexInVec	strops.cpp	/^int charIndexInVec(const vector<string>& str, const char& ch) {$/;"	f
 count	strops.cpp	/^int count(const string& str, const char& ch) {$/;"	f
 countInVector	strops.cpp	/^int countInVector(const vector<string>& str, const string& ch) {$/;"	f
@@ -31,11 +32,13 @@ isNumber	strops.cpp	/^bool isNumber(const string& str)$/;"	f
 ltrim	strops.cpp	/^string ltrim(const string& s)$/;"	f
 main	main.cpp	/^int main(int argc, char** argv){$/;"	f
 makeSectionsFromDelim	strops.cpp	/^string makeSectionsFromDelim(vector<string> splitStr, const string& sectionStart, const string& sectionEnd, bool startActive){$/;"	f
+processNormalLine	main.cpp	/^void processNormalLine(string& line){$/;"	f
 rangeInStr	strops.cpp	/^string rangeInStr(const string& str, const int& min, int max) {$/;"	f
 rangeInVec	strops.cpp	/^vector<string> rangeInVec(const vector<string>& str, const int& min, int max) {$/;"	f
 removeTabs	strops.cpp	/^vector<string> removeTabs(const vector<string>& str, const int& amnt) {$/;"	f
 removeTabsWdArry	strops.cpp	/^vector<vector<string>> removeTabsWdArry(const vector<vector<string>>& str, const int& amnt) {$/;"	f
 replace	strops.cpp	/^string replace(const string& str, const string& strToReplace, const string& replaceWith) {$/;"	f
+replaceIfOneWord	strops.cpp	/^string replaceIfOneWord(const string& str, const string& strToReplace, const string& replaceWith) {$/;"	f
 replaceVarInstances	main.cpp	/^string replaceVarInstances(string& str, map<string, string>& vars){$/;"	f
 rtrim	strops.cpp	/^string rtrim(const string& s)$/;"	f
 s:l	Session.vim	/^let s:l = 1 - ((0 * winheight(0) + 13) \/ 27)$/;"	v

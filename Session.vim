@@ -13,7 +13,7 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +62 main.cpp
+badd +184 main.cpp
 badd +10 strops.cpp
 badd +32 strops.h
 badd +1 term:///mnt/d/Code/LatexNotes//8472:/bin/bash
@@ -60,8 +60,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe '1resize ' . ((&lines * 36 + 22) / 44)
-exe '2resize ' . ((&lines * 4 + 22) / 44)
+exe '1resize ' . ((&lines * 40 + 24) / 48)
+exe '2resize ' . ((&lines * 4 + 24) / 48)
 argglobal
 setlocal fdm=expr
 setlocal fde=b:anyfold_ind_buffer[v:lnum-1]
@@ -75,30 +75,26 @@ setlocal fen
 normal! zo
 11
 normal! zo
-21
+19
 normal! zo
-55
+82
 normal! zo
-65
+121
 normal! zo
-74
+147
 normal! zo
-80
+153
 normal! zo
-94
+161
 normal! zo
-74
+175
 normal! zo
-80
-normal! zo
-94
-normal! zo
-let s:l = 71 - ((23 * winheight(0) + 18) / 36)
+let s:l = 132 - ((25 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 71
-normal! 025|
+keepjumps 132
+normal! 032|
 wincmd w
 argglobal
 if bufexists(fnamemodify("term:///mnt/d/Code/LatexMarkdown//5324:/bin/bash", ":p")) | buffer term:///mnt/d/Code/LatexMarkdown//5324:/bin/bash | else | edit term:///mnt/d/Code/LatexMarkdown//5324:/bin/bash | endif
@@ -114,15 +110,15 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 493 - ((1 * winheight(0) + 2) / 4)
+let s:l = 355 - ((3 * winheight(0) + 2) / 4)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 493
-normal! 046|
+keepjumps 355
+normal! 0
 wincmd w
-exe '1resize ' . ((&lines * 36 + 22) / 44)
-exe '2resize ' . ((&lines * 4 + 22) / 44)
+exe '1resize ' . ((&lines * 40 + 24) / 48)
+exe '2resize ' . ((&lines * 4 + 24) / 48)
 tabnext
 edit strops.h
 argglobal
@@ -135,7 +131,7 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 74 - ((36 * winheight(0) + 20) / 41)
+let s:l = 74 - ((40 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -155,7 +151,7 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 13) / 27)
+let s:l = 1 - ((0 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -175,7 +171,7 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 37 - ((36 * winheight(0) + 20) / 41)
+let s:l = 37 - ((36 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -193,7 +189,7 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 33 - ((28 * winheight(0) + 20) / 41)
+let s:l = 33 - ((31 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -214,7 +210,7 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 27 - ((26 * winheight(0) + 13) / 27)
+let s:l = 27 - ((26 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -232,7 +228,7 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 28 - ((14 * winheight(0) + 13) / 27)
+let s:l = 28 - ((23 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -262,112 +258,96 @@ normal! zo
 normal! zo
 73
 normal! zo
-93
+86
 normal! zo
-110
+106
 normal! zo
-142
+155
 normal! zo
-151
+164
 normal! zo
-160
+173
 normal! zo
-176
+189
 normal! zo
-184
-normal! zo
-203
-normal! zo
-206
-normal! zo
-213
+197
 normal! zo
 216
 normal! zo
-217
+226
 normal! zo
-232
+229
 normal! zo
-241
+230
 normal! zo
-258
+245
 normal! zo
-264
+254
+normal! zo
+271
 normal! zo
 277
 normal! zo
-284
+290
 normal! zo
-313
+297
 normal! zo
-320
+326
 normal! zo
-327
+333
 normal! zo
-338
+340
 normal! zo
-343
+351
 normal! zo
-352
+356
 normal! zo
-358
+365
 normal! zo
 371
 normal! zo
-373
-normal! zo
-380
-normal! zo
-382
-normal! zo
-383
-normal! zo
-390
+384
 normal! zo
 393
 normal! zo
-400
+403
 normal! zo
-409
+406
 normal! zo
-412
+413
 normal! zo
-416
+422
 normal! zo
-426
+425
 normal! zo
 429
 normal! zo
-434
+439
 normal! zo
-446
+442
 normal! zo
-458
+459
 normal! zo
-470
+471
 normal! zo
-482
-normal! zo
-485
+483
 normal! zo
 495
 normal! zo
-511
+508
 normal! zo
-517
+524
 normal! zo
-519
+530
 normal! zo
-545
+532
 normal! zo
-547
-normal! zo
-let s:l = 338 - ((20 * winheight(0) + 20) / 41)
+let s:l = 338 - ((22 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 338
-normal! 036|
+normal! 04|
 tabnext 1
 set stal=1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

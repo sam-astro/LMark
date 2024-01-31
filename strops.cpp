@@ -70,6 +70,19 @@ std::string escaped(const std::string& input)
 	return output;
 }
 
+std::string capitalize(const std::string& input)
+{
+	std::vector<std::string> words = split(input, ' ');
+	std::string output;
+	
+	for(std::string& word : words){
+		word[0] = toupper(word[0]);
+		output += word + " ";
+	}
+
+	return output;
+}
+
 string StringRaw(const string& s)
 {
 	string str = trim(s);
@@ -526,6 +539,45 @@ string replace(const string& str, const string& strToReplace, const string& repl
 			if ((int)strToReplace.size() == sameLetters)
 			{
 				//cout << "replaced " << "\"" << strToReplace << "\"" << startReplaceIndex << endl;
+				newStr += replaceWith;
+				sameLetters = 0;
+				savedLetters = "";
+			}
+		}
+		else
+		{
+			newStr += savedLetters + str[i];
+			sameLetters = 0;
+			savedLetters = "";
+		}
+	}
+
+	return newStr;
+}
+
+
+string replaceIfOneWord(const string& str, const string& strToReplace, const string& replaceWith) {
+	string newStr;
+	string savedLetters;
+
+	int sameLetters = 0;
+	//int startReplaceIndex = 0;
+	for (int i = 0; i < (int)str.size(); i++)
+	{
+		if (str[i] == strToReplace[sameLetters])
+		{
+			savedLetters += str[i];
+			sameLetters++;
+
+			if ((int)strToReplace.size() == sameLetters)
+			{
+				// Also make sure the following character is *not* alphanumeric, or is eol
+				if(i < str.size()-1)
+					if(isalnum(str[i+1]))
+					{ // fail the check for this word, continue
+						continue;
+					}
+
 				newStr += replaceWith;
 				sameLetters = 0;
 				savedLetters = "";
