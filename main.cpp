@@ -11,7 +11,12 @@ string replaceVarInstances(string& str, map<string, string>& vars){
 	if(vars.size() > 0)
 		for (const auto & [key, value] : vars)
 		{
-			str = replaceIfOneWord(str, key, value);
+			// if var is two dots (..varName) then it has much more replacing power
+			if(key[1] == '.')
+				str = replace(str, key, value);
+			// Otherwise, normal var
+			else
+				str = replaceIfOneWord(str, key, value);
 		}
 	return str;
 }
@@ -182,6 +187,9 @@ int main(int argc, char** argv){
 			// Add indent if tab char, don't if no tab char
 			if(line[0] != '\t' && line[0] != ' ' && line[0] != '\\'){
 				outFile += "\\noindent ";
+			}
+			else{
+				outFile += "\n";
 			}
 
 			// Finally add the edited line to the output string
