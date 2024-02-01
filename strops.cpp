@@ -577,6 +577,24 @@ string replaceIfOneWord(const string& str, const string& strToReplace, const str
 					{ // fail the check for this word, continue
 						continue;
 					}
+					// If square bracket, get substring
+					else if(str[i+1] == '['){
+						if(isdigit(str[i+2])){
+							int startIndex = i+2;
+							int endIndex = indexInStr(str.substr(i+2, str.size()-1), ']');
+							std::string contents = str.substr(startIndex, endIndex);
+							try{
+								newStr += replaceWith.substr(0, stoi(contents));
+								sameLetters = 0;
+								savedLetters = "";
+								i = startIndex+endIndex+1;
+							}
+							catch(...){}
+							printf("\t %% getting substring from variable \"%s\" => \"%s\"\n", (char*)contents.c_str(), replaceWith.substr(0, stoi(contents)).c_str());
+							printf("\t\trange (%d,%d)\n", startIndex, endIndex);
+							continue;
+						}
+					}
 
 				newStr += replaceWith;
 				sameLetters = 0;
