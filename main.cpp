@@ -115,12 +115,15 @@ int main(int argc, char** argv){
 	variables["==>"] = "$\\Rightarrow$";
 	variables["<=="] = "$\\Leftarrow$";
 
-	outFile += "\\documentclass{article}\n";
 	//outFile += "\\documentclass{article}\n\\usepackage{listings}\n";
 
 
 	bool openCode = false;
 	bool openList = false;
+
+	bool hasDocumentClass = false;
+	bool hasDocumentEnd = false;
+	bool hasBegunDocument = false;
 
 	std::string line;
 	while (std::getline(infile, line))
@@ -137,6 +140,11 @@ int main(int argc, char** argv){
 				outFile += '\n';
 			continue;
 		}
+
+		if(replace(line, "\\end{document}", "") != line)
+			hasDocumentEnd = true;
+		if(replace(line, "\\documentclass", "") != line)
+			hasDocumentClass = true;
 		
 		
 		// Look for other leading character modifiers
@@ -150,8 +158,10 @@ int main(int argc, char** argv){
 			nospace = true;
 		}
 		else if(line[0] == ':'){
-			if(split(line, ' ')[0] == ":content")
+			if(split(line, ' ')[0] == ":content"){
 				outFile += "\\begin{document}";
+				hasBegunDocument = true;
+			}
 			else if(split(line, ':')[1] == "pkg")
 				outFile += "\\usepackage{" + split(line, ':')[2] + "}";
 		}
@@ -185,7 +195,7 @@ int main(int argc, char** argv){
 			}
 
 			// Add indent if tab char, don't if no tab char
-			if(line[0] != '\t' && line[0] != ' ' && line[0] != '\\'){
+			if(line[0] != '\t' && line[0] != ' ' && line[0] != '\\' && line[0] != '%' && hasBegunDocument){
 				outFile += "\\noindent ";
 			}
 			else{
@@ -206,7 +216,10 @@ int main(int argc, char** argv){
 	{
 		printf("\t #  key: \"%s\"  value: \"%s\"\n", key.c_str(), value.c_str());
 	}
-	outFile += "\\end{document}";
+	if(!hasDocumentClass)
+		outFile = "\\documentclass{article}\n"+outFile;
+	if(!hasDocumentEnd)
+		outFile += "\\end{document}";
 
 	std::ofstream out(split(lMarkPath, '.')[0] + ".tex");
     out << outFile;

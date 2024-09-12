@@ -1,0 +1,5 @@
+[0] Config.pm:307> INFO - This is Biber 2.17
+[0] Config.pm:310> INFO - Logfile is 'journal-article.blg'
+[136] biber-MSWIN64:340> INFO - === 
+[500] Utils.pm:409> ERROR - Cannot find 'journal-article.bcf'!
+[500] Biber.pm:135> INFO - ERRORS: 1
