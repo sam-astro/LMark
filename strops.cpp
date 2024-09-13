@@ -152,6 +152,43 @@ string trim(const string& s) {
 	return rtrim(ltrim(s));
 }
 
+vector<string> splitOutsideDelim(const string& str, const string& del, const char& delim) {
+	if (countStr(str, del) == 0)
+		return vector<string>{str};
+
+	// declaring temp string to store the curr "word" upto del
+	string temp = "";
+	vector<string> splitWords;
+	int j = 0;
+	bool inDelimSection = false;
+
+	for (int i = 0; i < (int)str.size(); i++)
+	{
+		// If cur char is not del, then append it to the cur "word", otherwise
+		// you have completed the word, print it, and start a new word.
+		if (str[i] != del[j])
+		{
+			temp += str[i];
+			j = 0;
+			if(str[i] == delim)
+				inDelimSection = !inDelimSection;
+		}
+		else if (str[i] == del[j] || inDelimSection)
+		{
+			j++;
+			temp += str[i];
+			if(j == del.size()){
+				splitWords.push_back(rangeInStr(temp, 0, temp.size()-del.size()));
+				temp = "";
+				j = 0;
+			}
+		}
+	}
+	splitWords.push_back(temp);
+
+	return splitWords;
+}
+
 vector<string> split(const string& str, const string& del) {
 	if (countStr(str, del) == 0)
 		return vector<string>{str};
@@ -360,6 +397,32 @@ bool startsWith(const string& str, const string& lookFor)
 	}
 
 	return true;
+}
+
+int countOutsideDelim(const string& str, const string& sc, const char& delim) {
+	int cnt = 0;
+	int c2 = 0;
+	bool waitingForClose = false;
+	for (int i = 0; i < (int)str.size(); i++){
+		if(str[i] == delim)
+			waitingForClose = !waitingForClose;
+		
+		else if(!waitingForClose)
+		{
+			if (str[i] == sc[c2]){
+				c2++;
+				if(c2 == (int)sc.size()){
+					cnt++;
+					c2 = 0;
+				}
+			}
+			else{
+				c2 = 0;
+			}
+		}
+	}
+
+	return cnt;
 }
 
 int countOutsideParenthesis(const string& str, const char& searchFor)

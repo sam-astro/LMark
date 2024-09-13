@@ -24,62 +24,62 @@ string replaceVarInstances(string& str, map<string, string>& vars){
 void processNormalLine(string& line){
 
 	// Check for bold text modifier
-	int symbolInstances = countStr(line, "**");
-	vector<string> splitSymbolSections = split(line, "**");
+	int symbolInstances = countOutsideDelim(line, "**", '$');
+	vector<string> splitSymbolSections = splitOutsideDelim(line, "**", '$');
+	bool toggleEffect = false;
 	if(symbolInstances > 0){
 		printf("\tboldsections: %d, %d\n", symbolInstances, splitSymbolSections.size());
 		printf("\t\t- line after edits: \"%s\"\n", line.c_str());
+
+		if(startsWith(line, "**"))
+			toggleEffect = true;
+		
+		line = makeSectionsFromDelim(splitSymbolSections, "\\textbf{", "}", toggleEffect);
 	}
-	bool toggleEffect = false;
-	if(startsWith(line, "**"))
-		toggleEffect = true;
-	
-	line = makeSectionsFromDelim(splitSymbolSections, "\\textbf{", "}", toggleEffect);
 	
 	
 
 	// Check for underline text modifier
-	symbolInstances = countStr(line, "_");
-	splitSymbolSections = split(line, "_");
+	symbolInstances = countOutsideDelim(line, "_", '$');
+	splitSymbolSections = splitOutsideDelim(line, "_", '$');
 	if(symbolInstances > 0){
 		printf("\tunderlinedsections: %d, %d\n", symbolInstances, splitSymbolSections.size());
 		printf("\t\t- line after edits: \"%s\"\n", line.c_str());
-	}
-	toggleEffect = false;
-	if(startsWith(line, "_"))
-		toggleEffect = true;
 
-	line = makeSectionsFromDelim(splitSymbolSections, "\\underline{", "}", toggleEffect);
+		toggleEffect = false;
+		if(startsWith(line, "_"))
+			toggleEffect = true;
 
-	
+		line = makeSectionsFromDelim(splitSymbolSections, "\\underline{", "}", toggleEffect);
+	}	
 
 	// Check for italic text modifier
-	symbolInstances = countStr(line, "*");
-	splitSymbolSections = split(line, "*");
+	symbolInstances = countOutsideDelim(line, "*", '$');
+	splitSymbolSections = splitOutsideDelim(line, "*", '$');
 	if(symbolInstances > 0){
 		printf("\titalicsections: %d, %d\n", symbolInstances, splitSymbolSections.size());
 		printf("\t\t- line after edits: \"%s\"\n", line.c_str());
+
+		toggleEffect = false;
+		if(startsWith(line, "*"))
+			toggleEffect = true;
+
+		line = makeSectionsFromDelim(splitSymbolSections, "\\textit{", "}", toggleEffect);
 	}
-	toggleEffect = false;
-	if(startsWith(line, "*"))
-		toggleEffect = true;
-
-	line = makeSectionsFromDelim(splitSymbolSections, "\\textit{", "}", toggleEffect);
-
-
 
 	// Check for code text modifier
-	symbolInstances = countStr(line, "`");
-	splitSymbolSections = split(line, "`");
+	symbolInstances = countOutsideDelim(line, "`", '$');
+	splitSymbolSections = splitOutsideDelim(line, "`", '$');
 	if(symbolInstances > 0){
 		printf("\tcodesections: %d, %d\n", symbolInstances, splitSymbolSections.size());
 		printf("\t\t- line after edits: \"%s\"\n", line.c_str());
-	}
-	toggleEffect = false;
-	if(startsWith(line, "`"))
-		toggleEffect = true;
 
-	line = makeSectionsFromDelim(splitSymbolSections, "\\texttt{", "}", toggleEffect);
+		toggleEffect = false;
+		if(startsWith(line, "`"))
+			toggleEffect = true;
+
+		line = makeSectionsFromDelim(splitSymbolSections, "\\texttt{", "}", toggleEffect);
+	}
 }
 
 string fontSizes[] = {"\\Huge", "\\huge", "\\LARGE", "\\Large", "\\large"};
