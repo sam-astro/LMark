@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <filesystem>
 #include <map>
 #include "strops.h"
 
@@ -19,6 +20,38 @@ string replaceVarInstances(string& str, map<string, string>& vars){
 				str = replaceIfOneWord(str, key, value);
 		}
 	return str;
+}
+
+
+string replaceFuncInstances(string& str, map<string, string>& functions){
+
+	str = trim(str);
+	std::string newStr = str;
+	if(functions.size() > 0)
+		for (const auto & [key, value] : functions)
+		{
+			std::vector<int> positions = strPositions(str, key);
+			for(int i = 0; i < positions.size(); i++)
+			{
+				int argPos = key.size() + positions[i];
+				if(str[argPos] == '('){ // If there is a parenthesi, it is a function.
+					std::string betweenP = firstLevelInDelim(str, '(', ')', argPos);
+					std::string outValue = value;
+					//if(count(betweenP, ',') >= 1){
+						std::vector<std::string> argsStrs = split(betweenP, ',');
+						for(int j = 0; j < argsStrs.size(); j++){
+							outValue = replace(outValue, "%" + std::to_string(j+1), argsStrs[j]);
+						}
+					//}
+					printf("\t calling function `%s`, on input: \"%s\"\n", key.c_str(), str.c_str());
+					newStr = replace(newStr, key + "(" + betweenP + ")", outValue);
+					printf("\t\t > replace: `%s`\n", (key + "(" + betweenP + ")").c_str());
+					printf("\t\t > with outValue: `%s`\n", outValue.c_str());
+					printf("\t\t > new line: `%s`\n", newStr.c_str());
+				}
+			}
+		}
+	return newStr;
 }
 
 void processNormalLine(string& line){
@@ -99,13 +132,15 @@ int main(int argc, char** argv){
 
 	ifstream infile(lMarkPath);
 
+	std::filesystem::path p(lMarkPath);
+	string workingdir = p.parent_path().string();
+
 	std::string outFile;
 	std::map<std::string, std::string> variables;
+	std::map<std::string, std::string> functions;
 	variables[".sqrt"] = "\\sqrt";
 	variables[".frac"] = "\\frac";
 	variables[".f"] = "\\frac";
-	variables[".sum"] = "\\sum";
-	variables[".E"] = "\\sum";
 	variables[".latex"] = "\\LaTeX{}";
 	variables[".hrfull"] = "\\noindent \\makebox[\\linewidth]{\\rule{\\paperwidth}{0.4pt}}";
 	variables[".hrhalf"] = "\\noindent \\makebox[\\linewidth]{\\rule{15cm}{0.4pt}}";
@@ -125,14 +160,23 @@ int main(int argc, char** argv){
 	bool hasDocumentEnd = false;
 	bool hasBegunDocument = false;
 
-	std::string line;
-	while (std::getline(infile, line))
+	std::vector<std::string> linesVec = std::vector<std::string>();
+	std::string l;
+	while (std::getline(infile, l))
 	{
-		line += " ";
+		l += " ";
+		linesVec.push_back(l);
+	}
+
+	for(int i = 0; i < linesVec.size(); i++){
+		string line = linesVec[i];
+
 		string oldline = line;
 
-		if(!openCode)
+		if(!openCode){
 			line = replaceVarInstances(line, variables);
+			line = replaceFuncInstances(line, functions);
+		}
 
 		bool nospace = false;
 
@@ -164,6 +208,28 @@ int main(int argc, char** argv){
 			}
 			else if(split(line, ':')[1] == "pkg")
 				outFile += "\\usepackage{" + split(line, ':')[2] + "}";
+			else if(split(line, ':')[1] == "func"){
+				functions[split(split(line, ':')[2], ' ')[0]] = trim(rangeInStr(line, (split(line, ' ')[0]).size()+1, -1));
+				printf("\t + new function: %s  as  \"%s\" \n", split(split(line, ':')[2], ' ')[0].c_str(), functions[split(split(line, ':')[2], ' ')[0]].c_str());
+				printf("\t\t ? expected value: \"%s\" \n", oldline.c_str());
+				nospace = true;
+			}
+			else if(split(line, ':')[1] == "include"){
+				string filepath = workingdir+"./"+trim(split(line, ':')[2]);
+				printf("\t ^ including file: \"%s\"\n", filepath.c_str());
+				if(std::filesystem::exists(filepath)){
+					ifstream includefile(filepath);
+
+					std::string l;
+					while (std::getline(includefile, l)){
+						linesVec.insert(linesVec.begin() + i + 1, l);
+						printf("\t\t + adding line: \"%s\"\n", l.c_str());
+					}
+					includefile.close();
+				}
+				else
+					printf("\t ! file not found! \"%s\"\n", filepath.c_str());
+			}
 		}
 		else if(startsWith(line, "* ")){
 			if(!openList){
@@ -221,7 +287,9 @@ int main(int argc, char** argv){
 	if(!hasDocumentEnd)
 		outFile += "\\end{document}";
 
-	std::ofstream out(split(lMarkPath, '.')[0] + ".tex");
+	if(!std::filesystem::exists("./LMarkFiles"))
+		std::filesystem::create_directory("./LMarkFiles");
+	std::ofstream out("./LMarkFiles/" + split(lMarkPath, '.')[0] + ".tex");
     out << outFile;
     out.close();
 

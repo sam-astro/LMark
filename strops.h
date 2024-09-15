@@ -33,6 +33,8 @@ vector<string> split(const string& str, const string& del);
 
 string betweenChars(const string& str, const char& openChar, const char& closeChar);
 
+string firstLevelInDelim(const string& str, const char& openChar, const char& closeChar, int startPosition = 0);
+
 vector<string> splitNoOverlap(const string& str, const char& splitBy, const char& openChar, const char& closeChar);
 
 vector<string> splitOutsideDelim(const string& str, const string& del, const char& delim);
@@ -40,6 +42,8 @@ vector<string> splitOutsideDelim(const string& str, const string& del, const cha
 int count(const string& str, const char& ch);
 
 int countStr(const string& str, const string& ch);
+
+std::vector<int> strPositions(const string& str, const string& sc);
 
 int countNoOverlap(const string& str, const char& searchFor, const char& ch1, const char& ch2);
 

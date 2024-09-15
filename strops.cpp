@@ -260,6 +260,30 @@ int count(const string& str, const char& ch) {
 	return cnt;
 }
 
+std::vector<int> strPositions(const string& str, const string& sc) {
+	std::vector<int> outVec = std::vector<int>();
+	int cnt = 0;
+	int c2 = 0;
+	int pos = 0;
+	for (int i = 0; i < (int)str.size(); i++){
+		if (str[i] == sc[c2]){
+			c2++;
+			if(c2 == (int)sc.size()){
+				cnt++;
+				c2 = 0;
+				outVec.push_back(pos);
+			}
+		}
+		else{
+			c2 = 0;
+			pos = i+1;
+		}
+	}
+
+	return outVec;
+}
+
+
 int countStr(const string& str, const string& sc) {
 	int cnt = 0;
 	int c2 = 0;
@@ -360,6 +384,37 @@ vector<string> splitNoOverlap(const string& str, const char& splitBy, const char
 	return newStr;
 }
 
+string firstLevelInDelim(const string& str, const char& openChar, const char& closeChar, int startPosition)
+{
+	string content = "";
+
+	int startPos = 0;
+	int endPos = 0;
+	int level = 0;
+
+	for (int i = startPosition; i < (int)str.size(); i++)
+	{
+		printf("level: %d\n", level);
+		if (str[i] == openChar && level == 0){
+			startPos = i+1;
+			level++;
+		}
+		else if (str[i] == openChar){
+			level++;
+		}
+		else if (str[i] == closeChar && level == 1){
+			endPos = i-startPos;
+			break;
+		}
+		else if (str[i] == closeChar){
+			level--;
+		}
+	}
+
+	printf("STARTPOS: %d\n", startPos);
+	printf("ENDPOS: %d\n", endPos);
+	return str.substr(startPos, endPos);
+}
 string betweenChars(const string& str, const char& openChar, const char& closeChar)
 {
 	string content = "";
