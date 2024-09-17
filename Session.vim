@@ -13,7 +13,7 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +291 main.cpp
+badd +66 main.cpp
 badd +410 strops.cpp
 badd +32 strops.h
 badd +1 term:///mnt/d/Code/LatexNotes//8472:/bin/bash
@@ -94,20 +94,20 @@ normal! zo
 normal! zo
 128
 normal! zo
-179
+180
 normal! zo
-214
+215
 normal! zo
-245
+246
 normal! zo
-271
+272
 normal! zo
-let s:l = 291 - ((23 * winheight(0) + 20) / 41)
+let s:l = 157 - ((24 * winheight(0) + 20) / 41)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 291
-normal! 033|
+keepjumps 157
+normal! 024|
 wincmd w
 argglobal
 if bufexists(fnamemodify("term://~/Code/LMark//758630:/bin/bash", ":p")) | buffer term://~/Code/LMark//758630:/bin/bash | else | edit term://~/Code/LMark//758630:/bin/bash | endif
@@ -123,11 +123,11 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 74 - ((13 * winheight(0) + 7) / 14)
+let s:l = 37 - ((13 * winheight(0) + 7) / 14)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 74
+keepjumps 37
 normal! 0
 wincmd w
 exe '1resize ' . ((&lines * 41 + 29) / 59)
@@ -314,52 +314,52 @@ normal! zo
 normal! zo
 395
 normal! zo
-418
+415
 normal! zo
-425
+422
 normal! zo
-432
+429
 normal! zo
-443
+440
 normal! zo
-457
+454
 normal! zo
-461
+458
 normal! zo
-465
+462
 normal! zo
-467
+464
 normal! zo
-483
+480
 normal! zo
-489
+486
 normal! zo
-502
+499
 normal! zo
-504
+501
 normal! zo
-521
+518
 normal! zo
-531
+528
+normal! zo
+537
 normal! zo
 540
 normal! zo
-543
+554
 normal! zo
 557
 normal! zo
-560
+562
 normal! zo
-565
+586
 normal! zo
-589
-normal! zo
-let s:l = 570 - ((27 * winheight(0) + 28) / 56)
+let s:l = 413 - ((45 * winheight(0) + 28) / 56)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 570
-normal! 047|
+keepjumps 413
+normal! 09|
 tabnext 1
 set stal=1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

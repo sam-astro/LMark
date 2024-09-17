@@ -46,12 +46,12 @@ replaceFuncInstances	main.cpp	/^string replaceFuncInstances(string& str, map<str
 replaceIfOneWord	strops.cpp	/^string replaceIfOneWord(const string& str, const string& strToReplace, const string& replaceWith/;"	f	typeref:typename:string
 replaceVarInstances	main.cpp	/^string replaceVarInstances(string& str, map<string, string>& vars){$/;"	f	typeref:typename:string
 rtrim	strops.cpp	/^string rtrim(const string& s)$/;"	f	typeref:typename:string
-s:l	Session.vim	/^let s:l = 1 - ((0 * winheight(0) + 19) \/ 39)$/;"	v
-s:l	Session.vim	/^let s:l = 28 - ((10 * winheight(0) + 14) \/ 28)$/;"	v
-s:l	Session.vim	/^let s:l = 28 - ((20 * winheight(0) + 19) \/ 39)$/;"	v
-s:l	Session.vim	/^let s:l = 410 - ((18 * winheight(0) + 19) \/ 39)$/;"	v
-s:l	Session.vim	/^let s:l = 48 - ((25 * winheight(0) + 19) \/ 39)$/;"	v
-s:l	Session.vim	/^let s:l = 84 - ((9 * winheight(0) + 5) \/ 10)$/;"	v
+s:l	Session.vim	/^let s:l = 1 - ((0 * winheight(0) + 28) \/ 56)$/;"	v
+s:l	Session.vim	/^let s:l = 28 - ((27 * winheight(0) + 28) \/ 56)$/;"	v
+s:l	Session.vim	/^let s:l = 291 - ((23 * winheight(0) + 20) \/ 41)$/;"	v
+s:l	Session.vim	/^let s:l = 48 - ((36 * winheight(0) + 28) \/ 56)$/;"	v
+s:l	Session.vim	/^let s:l = 570 - ((27 * winheight(0) + 28) \/ 56)$/;"	v
+s:l	Session.vim	/^let s:l = 74 - ((13 * winheight(0) + 7) \/ 14)$/;"	v
 s:save_splitbelow	Session.vim	/^let s:save_splitbelow = &splitbelow$/;"	v
 s:save_splitright	Session.vim	/^let s:save_splitright = &splitright$/;"	v
 s:save_winminheight	Session.vim	/^let s:save_winminheight = &winminheight$/;"	v

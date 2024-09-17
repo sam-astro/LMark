@@ -394,7 +394,6 @@ string firstLevelInDelim(const string& str, const char& openChar, const char& cl
 
 	for (int i = startPosition; i < (int)str.size(); i++)
 	{
-		printf("level: %d\n", level);
 		if (str[i] == openChar && level == 0){
 			startPos = i+1;
 			level++;
@@ -411,8 +410,6 @@ string firstLevelInDelim(const string& str, const char& openChar, const char& cl
 		}
 	}
 
-	printf("STARTPOS: %d\n", startPos);
-	printf("ENDPOS: %d\n", endPos);
 	return str.substr(startPos, endPos);
 }
 string betweenChars(const string& str, const char& openChar, const char& closeChar)

@@ -62,12 +62,12 @@ void processNormalLine(string& line){
 	bool toggleEffect = false;
 	if(symbolInstances > 0){
 		printf("\tboldsections: %d, %d\n", symbolInstances, splitSymbolSections.size());
-		printf("\t\t- line after edits: \"%s\"\n", line.c_str());
 
-		if(startsWith(line, "**"))
-			toggleEffect = true;
+		//if(startsWith(line, "**"))
+		//	toggleEffect = true;
 		
 		line = makeSectionsFromDelim(splitSymbolSections, "\\textbf{", "}", toggleEffect);
+		printf("\t\t- line after edits: \"%s\"\n", line.c_str());
 	}
 	
 	
@@ -77,13 +77,13 @@ void processNormalLine(string& line){
 	splitSymbolSections = splitOutsideDelim(line, "_", '$');
 	if(symbolInstances > 0){
 		printf("\tunderlinedsections: %d, %d\n", symbolInstances, splitSymbolSections.size());
-		printf("\t\t- line after edits: \"%s\"\n", line.c_str());
 
 		toggleEffect = false;
-		if(startsWith(line, "_"))
-			toggleEffect = true;
+		//if(startsWith(line, "_"))
+		//	toggleEffect = true;
 
 		line = makeSectionsFromDelim(splitSymbolSections, "\\underline{", "}", toggleEffect);
+		printf("\t\t- line after edits: \"%s\"\n", line.c_str());
 	}	
 
 	// Check for italic text modifier
@@ -91,13 +91,13 @@ void processNormalLine(string& line){
 	splitSymbolSections = splitOutsideDelim(line, "*", '$');
 	if(symbolInstances > 0){
 		printf("\titalicsections: %d, %d\n", symbolInstances, splitSymbolSections.size());
-		printf("\t\t- line after edits: \"%s\"\n", line.c_str());
 
 		toggleEffect = false;
-		if(startsWith(line, "*"))
-			toggleEffect = true;
+		//if(startsWith(line, "*"))
+		//	toggleEffect = true;
 
 		line = makeSectionsFromDelim(splitSymbolSections, "\\textit{", "}", toggleEffect);
+		printf("\t\t- line after edits: \"%s\"\n", line.c_str());
 	}
 
 	// Check for code text modifier
@@ -105,13 +105,13 @@ void processNormalLine(string& line){
 	splitSymbolSections = splitOutsideDelim(line, "`", '$');
 	if(symbolInstances > 0){
 		printf("\tcodesections: %d, %d\n", symbolInstances, splitSymbolSections.size());
-		printf("\t\t- line after edits: \"%s\"\n", line.c_str());
 
 		toggleEffect = false;
-		if(startsWith(line, "`"))
-			toggleEffect = true;
+		//if(startsWith(line, "`"))
+		//	toggleEffect = true;
 
 		line = makeSectionsFromDelim(splitSymbolSections, "\\texttt{", "}", toggleEffect);
+		printf("\t\t- line after edits: \"%s\"\n", line.c_str());
 	}
 }
 
@@ -152,6 +152,7 @@ int main(int argc, char** argv){
 	variables[".latex"] = "\\LaTeX{}";
 	variables[".hrfull"] = "\\noindent \\makebox[\\linewidth]{\\rule{\\paperwidth}{0.4pt}}";
 	variables[".hrhalf"] = "\\noindent \\makebox[\\linewidth]{\\rule{15cm}{0.4pt}}";
+	variables[".hr"] = "\\noindent \\makebox[\\linewidth]{\\rule{15cm}{0.4pt}}";
 	variables[".filename"] = replace(capitalize(split(lMarkPath, '.')[0]), "_", " ");
 	variables["-->"] = "$\\rightarrow$";
 	variables["<--"] = "$\\leftarrow$";
