@@ -19,6 +19,7 @@ WHITESPACE	strops.cpp	/^const string WHITESPACE = " \\t\\f\\n";$/;"	v	typeref:ty
 betweenChars	strops.cpp	/^string betweenChars(const string& str, const char& openChar, const char& closeChar)$/;"	f	typeref:typename:string
 capitalize	strops.cpp	/^std::string capitalize(const std::string& input)$/;"	f	typeref:typename:std::string
 charIndexInVec	strops.cpp	/^int charIndexInVec(const vector<string>& str, const char& ch) {$/;"	f	typeref:typename:int
+closeList	main.cpp	/^void closeList(string& outFile, bool& openList){$/;"	f	typeref:typename:void
 count	strops.cpp	/^int count(const string& str, const char& ch) {$/;"	f	typeref:typename:int
 countInVector	strops.cpp	/^int countInVector(const vector<string>& str, const string& ch) {$/;"	f	typeref:typename:int
 countNoOverlap	strops.cpp	/^int countNoOverlap(const string& str, const char& searchFor, const char& ch1, const char& ch2)$/;"	f	typeref:typename:int

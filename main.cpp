@@ -115,6 +115,14 @@ void processNormalLine(string& line){
 	}
 }
 
+void closeList(string& outFile, bool& openList){
+	// stop list if open
+	if(openList){
+		openList = !openList;
+		outFile += "\\end{itemize}\n";
+	}
+}
+
 string fontSizes[] = {"\\Huge", "\\huge", "\\LARGE", "\\Large", "\\large"};
 
 int main(int argc, char** argv){
@@ -193,15 +201,18 @@ int main(int argc, char** argv){
 		
 		// Look for other leading character modifiers
 		if(line[0] == '?'){
+			closeList(outFile, openList);
 			outFile += trim(rangeInStr(line, 1, -1));
 		}
 		else if(line[0] == '.'){
+			closeList(outFile, openList);
 			variables[split(line, ' ')[0]] = trim(rangeInStr(line, (split(line, ' ')[0]).size()+1, -1));
 			printf("\t + new var: %s  as  \"%s\" \n", split(line, ' ')[0].c_str(), variables[split(line, ' ')[0]].c_str());
 			printf("\t\t ? expected value: \"%s\" \n", oldline.c_str());
 			nospace = true;
 		}
 		else if(line[0] == ':'){
+			closeList(outFile, openList);
 			if(split(line, ' ')[0] == ":content"){
 				outFile += "\\begin{document}";
 				hasBegunDocument = true;
@@ -236,10 +247,13 @@ int main(int argc, char** argv){
 				outFile += "\\begin{itemize}\n";
 				openList = !openList;
 			}
+			line = line.substr(2, line.size());
+			printf("\t list item: \"%s\"\n", line.c_str());
 			processNormalLine(line);
 			outFile += "\\item " + line;
 		}
 		else if(startsWith(line, "```")){
+			closeList(outFile, openList);
 			if(openCode){
 				outFile += "\\end{lstlisting}\n";
 			}
@@ -249,16 +263,13 @@ int main(int argc, char** argv){
 			openCode = !openCode;
 		}
 		else if(line[0] == '#'){
+			closeList(outFile, openList);
 			int headingLevel = count(split(line, ' ')[0], '#');
 			outFile += "\\section*{" + fontSizes[headingLevel] + "{" + trim(rangeInStr(line, headingLevel + 1, -1)) + "}}\n\\normalsize{}";
 		}
 		// normal text, do processing
 		else{
-			// Stop list if open
-			if(openList){
-				outFile += "\\end{itemize}\n";
-				openList = !openList;
-			}
+			closeList(outFile, openList);
 
 			// Add indent if tab char, don't if no tab char
 			if(line[0] != '\t' && line[0] != ' ' && line[0] != '\\' && line[0] != '%' && hasBegunDocument){
@@ -277,6 +288,7 @@ int main(int argc, char** argv){
 			outFile += "\n";
 	}
 	infile.close();
+	closeList(outFile, openList);
 	printf("\nkey/values:\n");
 	for (const auto & [key, value] : variables)
 	{
