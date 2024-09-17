@@ -12,12 +12,22 @@ string replaceVarInstances(string& str, map<string, string>& vars){
 	if(vars.size() > 0)
 		for (const auto & [key, value] : vars)
 		{
+			// If var name is 3 dots, it will replace all instances of the var, name without dots
+			if(key.size() > 3){
+				if(key[2] == '.'){
+					str = replace(str, key.substr(3,key.size()-3), value);
+					continue;
+				}
+			}
 			// if var is two dots (..varName) then it has much more replacing power
-			if(key[1] == '.')
-				str = replace(str, key, value);
+			if(key.size() > 2){
+				if(key[1] == '.'){
+					str = replace(str, key, value);
+					continue;
+				}
+			}
 			// Otherwise, normal var
-			else
-				str = replaceIfOneWord(str, key, value);
+			str = replaceIfOneWord(str, key, value);
 		}
 	return str;
 }
@@ -184,6 +194,8 @@ int main(int argc, char** argv){
 
 		if(!openCode){
 			line = replaceVarInstances(line, variables);
+			if(oldline != line)
+				printf("\t replaced variables:\n\t\t- old line: \"%s\"\n\t\t+ new line: \"%s\"\n", oldline.c_str(), line.c_str());
 			line = replaceFuncInstances(line, functions);
 		}
 
@@ -207,9 +219,10 @@ int main(int argc, char** argv){
 		}
 		else if(line[0] == '.'){
 			closeList(outFile, openList);
-			variables[split(line, ' ')[0]] = trim(rangeInStr(line, (split(line, ' ')[0]).size()+1, -1));
+			variables[split(line, ' ')[0]] = trim(line.substr((split(line, ' ')[0]).size(), line.size()-(split(line, ' ')[0]).size()));
+			//variables[split(line, ' ')[0]] = trim(rangeInStr(line, (split(line, ' ')[0]).size()+1, -1));
 			printf("\t + new var: %s  as  \"%s\" \n", split(line, ' ')[0].c_str(), variables[split(line, ' ')[0]].c_str());
-			printf("\t\t ? expected value: \"%s\" \n", oldline.c_str());
+			//printf("\t\t ? expected value: \"%s\" \n", oldline.c_str());
 			nospace = true;
 		}
 		else if(line[0] == ':'){
@@ -234,7 +247,7 @@ int main(int argc, char** argv){
 
 					std::string l;
 					while (std::getline(includefile, l)){
-						linesVec.insert(linesVec.begin() + i + 1, l);
+						linesVec.insert(linesVec.begin() + i + 1, l+" ");
 						printf("\t\t + adding line: \"%s\"\n", l.c_str());
 					}
 					includefile.close();
