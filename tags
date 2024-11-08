@@ -60,6 +60,7 @@ s:shortmess_save	Session.vim	/^let s:shortmess_save = &shortmess$/;"	v
 s:so_save	Session.vim	/^let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1$/;"	v
 s:sx	Session.vim	/^let s:sx = expand("<sfile>:p:r")."x.vim"$/;"	v
 s:wipebuf	Session.vim	/^  let s:wipebuf = bufnr('%')$/;"	v
+sectionDepths	main.cpp	/^string sectionDepths[] = {"section", "subsection", "subsubsection", "paragraph", "subparagraph"}/;"	v	typeref:typename:string[]
 slice	strops.cpp	/^vector<string> slice(vector<string> const& v, int min, int max)$/;"	f	typeref:typename:vector<string>
 split	strops.cpp	/^vector<string> split(const string& str, const char& del) {$/;"	f	typeref:typename:vector<string>
 split	strops.cpp	/^vector<string> split(const string& str, const string& del) {$/;"	f	typeref:typename:vector<string>

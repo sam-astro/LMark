@@ -13,7 +13,7 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +66 main.cpp
+badd +307 main.cpp
 badd +410 strops.cpp
 badd +32 strops.h
 badd +1 term:///mnt/d/Code/LatexNotes//8472:/bin/bash
@@ -76,38 +76,38 @@ setlocal fen
 normal! zo
 12
 normal! zo
-26
+13
 normal! zo
-30
+23
 normal! zo
-31
-normal! zo
-34
-normal! zo
-37
+36
 normal! zo
 40
 normal! zo
-57
+41
 normal! zo
-118
+44
+normal! zo
+47
+normal! zo
+67
 normal! zo
 128
 normal! zo
-180
+139
 normal! zo
-215
+207
 normal! zo
-246
+245
 normal! zo
-272
+296
 normal! zo
-let s:l = 157 - ((24 * winheight(0) + 20) / 41)
+let s:l = 300 - ((13 * winheight(0) + 20) / 41)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 157
-normal! 024|
+keepjumps 300
+normal! 0109|
 wincmd w
 argglobal
 if bufexists(fnamemodify("term://~/Code/LMark//758630:/bin/bash", ":p")) | buffer term://~/Code/LMark//758630:/bin/bash | else | edit term://~/Code/LMark//758630:/bin/bash | endif
@@ -123,11 +123,11 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 37 - ((13 * winheight(0) + 7) / 14)
+let s:l = 87 - ((13 * winheight(0) + 7) / 14)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 37
+keepjumps 87
 normal! 0
 wincmd w
 exe '1resize ' . ((&lines * 41 + 29) / 59)

@@ -134,6 +134,7 @@ void closeList(string& outFile, bool& openList){
 }
 
 string fontSizes[] = {"\\Huge", "\\huge", "\\LARGE", "\\Large", "\\large"};
+string sectionDepths[] = {"section", "subsection", "subsubsection", "paragraph", "subparagraph"};
 
 int main(int argc, char** argv){
 	
@@ -163,6 +164,7 @@ int main(int argc, char** argv){
 	variables[".hrfull"] = "\\noindent \\makebox[\\linewidth]{\\rule{\\paperwidth}{0.4pt}}";
 	variables[".hrhalf"] = "\\noindent \\makebox[\\linewidth]{\\rule{15cm}{0.4pt}}";
 	variables[".hr"] = "\\noindent \\makebox[\\linewidth]{\\rule{15cm}{0.4pt}}";
+	variables[".space"] = "\\vspace{5mm} %5mm vertical space";
 	variables[".filename"] = replace(capitalize(split(lMarkPath, '.')[0]), "_", " ");
 	variables["-->"] = "$\\rightarrow$";
 	variables["<--"] = "$\\leftarrow$";
@@ -181,8 +183,23 @@ int main(int argc, char** argv){
 
 	std::vector<std::string> linesVec = std::vector<std::string>();
 	std::string l;
+	int newlineInARow = 0;
+	linesVec.push_back(":pkg:hyperref ");
+	linesVec.push_back(":pkg:graphicx ");
+	linesVec.push_back("\\graphicspath{ {/home/sam/Pictures} } ");
+	linesVec.push_back(":func:img \\includegraphics[width=\\textwidth]{%1} ");
+	linesVec.push_back(":func:imgh \\includegraphics[width=0.5\\textwidth]{%1} ");
 	while (std::getline(infile, l))
 	{
+		if(l == "\n" || l == ""){
+			newlineInARow++;
+			if(newlineInARow >= 2){
+				l = ".space";
+				newlineInARow=0;
+			}
+		}
+		else
+			newlineInARow = 0;
 		l += " ";
 		linesVec.push_back(l);
 	}
@@ -279,7 +296,15 @@ int main(int argc, char** argv){
 		else if(line[0] == '#'){
 			closeList(outFile, openList);
 			int headingLevel = count(split(line, ' ')[0], '#');
-			outFile += "\\section*{" + fontSizes[headingLevel] + "{" + trim(rangeInStr(line, headingLevel + 1, -1)) + "}}\n\\normalsize{}";
+			std::string headerValue = trim(rangeInStr(line, headingLevel + 1, -1));
+			outFile += "\\section*{" + fontSizes[headingLevel] + "{" + headerValue + "}}\n\\normalsize{} \n";
+			// The largest of section headers will not count towards the table of contents, 
+			// since they are usually only used for the title
+			if(headingLevel > 1){
+				outFile += "\\phantomsection \n";
+				outFile += "\\addtocontents{toc}{\\protect\\setcounter{tocdepth}{"+std::to_string(headingLevel)+"}} \n";
+				outFile += "\\addcontentsline{toc}{"+sectionDepths[headingLevel-2]+"}{"+headerValue+"} \n";
+			}
 		}
 		// normal text, do processing
 		else{
@@ -318,6 +343,8 @@ int main(int argc, char** argv){
 	std::ofstream out("./LMarkFiles/" + split(lMarkPath, '.')[0] + ".tex");
     out << outFile;
     out.close();
+
+	std::printf("\n\nSuccessfully wrote LaTeX file to %s\n", ("./LMarkFiles/" + split(lMarkPath, '.')[0] + ".tex").c_str());
 
 	return 0;
 }
