@@ -372,6 +372,8 @@ int main(int argc, char** argv){
 	if(!hasDocumentEnd)
 		outFile += "\\end{document}";
 
+	if(!std::filesystem::exists("./output"))
+		std::filesystem::create_directory("./output");
 	if(!std::filesystem::exists("./LMarkFiles"))
 		std::filesystem::create_directory("./LMarkFiles");
 	std::ofstream out("./LMarkFiles/" + split(lMarkPath, '.')[0] + ".tex");
