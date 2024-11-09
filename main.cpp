@@ -166,6 +166,7 @@ int main(int argc, char** argv){
 	variables[".hr"] = "\\noindent \\makebox[\\linewidth]{\\rule{15cm}{0.4pt}}";
 	variables[".space"] = "\\vspace{5mm} %5mm vertical space";
 	variables[".filename"] = replace(capitalize(split(lMarkPath, '.')[0]), "_", " ");
+	variables[".newpage"] = "\\newpage";
 	variables["-->"] = "$\\rightarrow$";
 	variables["<--"] = "$\\leftarrow$";
 	variables["==>"] = "$\\Rightarrow$";
@@ -186,7 +187,10 @@ int main(int argc, char** argv){
 	int newlineInARow = 0;
 	linesVec.push_back(":pkg:hyperref ");
 	linesVec.push_back(":pkg:graphicx ");
-	linesVec.push_back("\\graphicspath{ {/home/sam/Pictures} } ");
+	linesVec.push_back(":pkg:indentfirst ");
+	linesVec.push_back(":pkg:color ");
+	linesVec.push_back(":pkg:listings ");
+	linesVec.push_back("\\graphicspath{ {~/Pictures} } ");
 	linesVec.push_back(":func:img \\includegraphics[width=\\textwidth]{%1} ");
 	linesVec.push_back(":func:imgh \\includegraphics[width=0.5\\textwidth]{%1} ");
 	while (std::getline(infile, l))
@@ -272,6 +276,35 @@ int main(int argc, char** argv){
 				else
 					printf("\t ! file not found! \"%s\"\n", filepath.c_str());
 			}
+			else if(split(line, ':')[1] == "includevars"){
+				string filepath = workingdir+"./"+trim(split(line, ':')[2]);
+				printf("\t ^ including variables from file: \"%s\"\n", filepath.c_str());
+				std::map<std::string, bool> varMap = std::map<std::string, bool>();
+				if(std::filesystem::exists(filepath)){
+					ifstream includefile(filepath);
+
+					std::string l;
+					while (std::getline(includefile, l)){
+						if(startsWith(l, ".")){
+							if(split(l, ' ').size() == 1) // Only var definitions, not uses
+								continue;
+							std::string vName = split(l, ' ')[0];
+							// If the variable isnt defined yet
+							if(varMap.find(vName) == varMap.end()){
+								linesVec.insert(linesVec.begin() + i + 1, l+" ");
+								varMap[vName] = true;
+							}
+						}
+						else if(startsWith(l, ":func") || startsWith(l, ":pkg")){
+							linesVec.insert(linesVec.begin() + i + 1, l+" ");
+							printf("\t\t + adding line: \"%s\"\n", l.c_str());
+						}
+					}
+					includefile.close();
+				}
+				else
+					printf("\t ! file not found! \"%s\"\n", filepath.c_str());
+			}
 		}
 		else if(startsWith(line, "* ")){
 			if(!openList){
@@ -311,8 +344,9 @@ int main(int argc, char** argv){
 			closeList(outFile, openList);
 
 			// Add indent if tab char, don't if no tab char
-			if(line[0] != '\t' && line[0] != ' ' && line[0] != '\\' && line[0] != '%' && hasBegunDocument){
-				outFile += "\\noindent ";
+			if(oldline[0] != '\t' && oldline[0] != ' ' && oldline[0] != '\\' && oldline[0] != '%' && hasBegunDocument){
+				if(!openCode)
+					outFile += "\\noindent ";
 			}
 			else{
 				outFile += "\n";
