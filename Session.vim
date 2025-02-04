@@ -13,7 +13,7 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +307 main.cpp
+badd +1 main.cpp
 badd +410 strops.cpp
 badd +32 strops.h
 badd +1 term:///mnt/d/Code/LatexNotes//8472:/bin/bash
@@ -72,21 +72,19 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-10
+11
 normal! zo
-12
+14
 normal! zo
-13
+15
 normal! zo
-23
+37
 normal! zo
-36
+42
 normal! zo
-40
+43
 normal! zo
-41
-normal! zo
-44
+45
 normal! zo
 47
 normal! zo
@@ -94,20 +92,26 @@ normal! zo
 normal! zo
 128
 normal! zo
-139
+140
 normal! zo
-207
+202
 normal! zo
-245
+203
 normal! zo
-296
+216
 normal! zo
-let s:l = 300 - ((13 * winheight(0) + 20) / 41)
+259
+normal! zo
+289
+normal! zo
+293
+normal! zo
+let s:l = 304 - ((17 * winheight(0) + 20) / 41)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 300
-normal! 0109|
+keepjumps 304
+normal! 033|
 wincmd w
 argglobal
 if bufexists(fnamemodify("term://~/Code/LMark//758630:/bin/bash", ":p")) | buffer term://~/Code/LMark//758630:/bin/bash | else | edit term://~/Code/LMark//758630:/bin/bash | endif
@@ -123,11 +127,11 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 87 - ((13 * winheight(0) + 7) / 14)
+let s:l = 32 - ((13 * winheight(0) + 7) / 14)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 87
+keepjumps 32
 normal! 0
 wincmd w
 exe '1resize ' . ((&lines * 41 + 29) / 59)
@@ -149,7 +153,7 @@ if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 48
-normal! 078|
+normal! 0
 tabnext
 edit examples/test.lmark
 argglobal
@@ -258,101 +262,95 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-14
+30
 normal! zo
-28
+34
 normal! zo
-32
+59
 normal! zo
-35
+63
 normal! zo
-53
+64
 normal! zo
-73
+95
 normal! zo
-86
+145
 normal! zo
-106
+178
 normal! zo
-155
-normal! zo
-165
-normal! zo
-169
-normal! zo
-176
+189
 normal! zo
 192
 normal! zo
-201
+198
 normal! zo
-210
+213
 normal! zo
-226
+223
 normal! zo
-234
+230
 normal! zo
-253
+245
 normal! zo
-263
+254
+normal! zo
+281
 normal! zo
 287
 normal! zo
-290
-normal! zo
-291
+288
 normal! zo
 306
 normal! zo
-332
+326
 normal! zo
-351
+353
 normal! zo
-358
+371
 normal! zo
-387
+378
 normal! zo
-395
+404
 normal! zo
-415
+412
 normal! zo
-422
+431
 normal! zo
-429
-normal! zo
-440
+438
 normal! zo
 454
 normal! zo
-458
+467
 normal! zo
-462
+472
 normal! zo
-464
+476
 normal! zo
-480
+477
 normal! zo
-486
+493
 normal! zo
 499
 normal! zo
-501
+511
 normal! zo
-518
+521
 normal! zo
-528
+524
 normal! zo
-537
+525
 normal! zo
-540
+532
 normal! zo
-554
+536
+normal! zo
+553
 normal! zo
 557
 normal! zo
-562
+560
 normal! zo
-586
+569
 normal! zo
 let s:l = 413 - ((45 * winheight(0) + 28) / 56)
 if s:l < 1 | let s:l = 1 | endif

@@ -1,9 +1,10 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <regex>
-#include <limits>
 #include "strops.h"
+
+#include <fstream>
+#include <iostream>
+#include <limits>
+#include <regex>
+#include <string>
 //#include "builtin.h"
 using namespace std;
 
@@ -14,7 +15,8 @@ const string WHITESPACE = " \t\f\n";
 bool isNumber(const string& str)
 {
 	for (char const& c : str) {
-		if (isdigit(c) == 0 && c != '.') return false;
+		if (isdigit(c) == 0 && c != '.')
+			return false;
 	}
 	return true;
 }
@@ -29,19 +31,23 @@ string unescape(const string& s)
 {
 	string res;
 	string::const_iterator it = s.begin();
-	while (it != s.end())
-	{
+	while (it != s.end()) {
 		char c = *it++;
-		if (c == '\\' && it != s.end())
-		{
+		if (c == '\\' && it != s.end()) {
 			switch (*it++) {
-			case '\\': c = '\\'; break;
-			case 'n': c = '\n'; break;
-			case 't': c = '\t'; break;
-				// all other escapes
-			default:
-				// invalid escape sequence - skip it. alternatively you can copy it as is, throw an exception...
-				continue;
+				case '\\':
+					c = '\\';
+					break;
+				case 'n':
+					c = '\n';
+					break;
+				case 't':
+					c = '\t';
+					break;
+					// all other escapes
+				default:
+					// invalid escape sequence - skip it. alternatively you can copy it as is, throw an exception...
+					continue;
 			}
 		}
 		res += c;
@@ -56,14 +62,30 @@ std::string escaped(const std::string& input)
 	output.reserve(input.size());
 	for (const char c : input) {
 		switch (c) {
-		case '\a':  output += "\\a";        break;
-		case '\b':  output += "\\b";        break;
-		case '\f':  output += "\\f";        break;
-		case '\n':  output += "\\n";        break;
-		case '\r':  output += "\\r";        break;
-		case '\t':  output += "\\t";        break;
-		case '\v':  output += "\\v";        break;
-		default:    output += c;            break;
+			case '\a':
+				output += "\\a";
+				break;
+			case '\b':
+				output += "\\b";
+				break;
+			case '\f':
+				output += "\\f";
+				break;
+			case '\n':
+				output += "\\n";
+				break;
+			case '\r':
+				output += "\\r";
+				break;
+			case '\t':
+				output += "\\t";
+				break;
+			case '\v':
+				output += "\\v";
+				break;
+			default:
+				output += c;
+				break;
 		}
 	}
 
@@ -74,8 +96,8 @@ std::string capitalize(const std::string& input)
 {
 	std::vector<std::string> words = split(input, ' ');
 	std::string output;
-	
-	for(std::string& word : words){
+
+	for (std::string& word : words) {
 		word[0] = toupper(word[0]);
 		output += word + " ";
 	}
@@ -148,13 +170,15 @@ string rtrim(const string& s)
 	return (end == string::npos) ? "" : s.substr(0, end + 1);
 }
 
-string trim(const string& s) {
+string trim(const string& s)
+{
 	return rtrim(ltrim(s));
 }
 
-vector<string> splitOutsideDelim(const string& str, const string& del, const char& delim) {
+vector<string> splitOutsideDelim(const string& str, const string& del, const char& delim)
+{
 	if (countStr(str, del) == 0)
-		return vector<string>{str};
+		return vector<string> {str};
 
 	// declaring temp string to store the curr "word" upto del
 	string temp = "";
@@ -162,23 +186,20 @@ vector<string> splitOutsideDelim(const string& str, const string& del, const cha
 	int j = 0;
 	bool inDelimSection = false;
 
-	for (int i = 0; i < (int)str.size(); i++)
-	{
+	for (int i = 0; i < (int)str.size(); i++) {
 		// If cur char is not del, then append it to the cur "word", otherwise
 		// you have completed the word, print it, and start a new word.
-		if (str[i] != del[j])
-		{
+		if (str[i] != del[j]) {
 			temp += str[i];
 			j = 0;
-			if(str[i] == delim)
+			if (str[i] == delim)
 				inDelimSection = !inDelimSection;
 		}
-		else if (str[i] == del[j] || inDelimSection)
-		{
+		else if (str[i] == del[j] || inDelimSection) {
 			j++;
 			temp += str[i];
-			if(j == del.size()){
-				splitWords.push_back(rangeInStr(temp, 0, temp.size()-del.size()));
+			if (j == del.size()) {
+				splitWords.push_back(rangeInStr(temp, 0, temp.size() - del.size()));
 				temp = "";
 				j = 0;
 			}
@@ -189,30 +210,28 @@ vector<string> splitOutsideDelim(const string& str, const string& del, const cha
 	return splitWords;
 }
 
-vector<string> split(const string& str, const string& del) {
+vector<string> split(const string& str, const string& del)
+{
 	if (countStr(str, del) == 0)
-		return vector<string>{str};
+		return vector<string> {str};
 
 	// declaring temp string to store the curr "word" upto del
 	string temp = "";
 	vector<string> splitWords;
 	int j = 0;
 
-	for (int i = 0; i < (int)str.size(); i++)
-	{
+	for (int i = 0; i < (int)str.size(); i++) {
 		// If cur char is not del, then append it to the cur "word", otherwise
 		// you have completed the word, print it, and start a new word.
-		if (str[i] != del[j])
-		{
+		if (str[i] != del[j]) {
 			temp += str[i];
 			j = 0;
 		}
-		else
-		{
+		else {
 			j++;
 			temp += str[i];
-			if(j == del.size()){
-				splitWords.push_back(rangeInStr(temp, 0, temp.size()-del.size()));
+			if (j == del.size()) {
+				splitWords.push_back(rangeInStr(temp, 0, temp.size() - del.size()));
 				temp = "";
 				j = 0;
 			}
@@ -223,24 +242,22 @@ vector<string> split(const string& str, const string& del) {
 	return splitWords;
 }
 
-vector<string> split(const string& str, const char& del) {
+vector<string> split(const string& str, const char& del)
+{
 	if (count(str, del) == 0)
-		return vector<string>{str};
+		return vector<string> {str};
 
 	// declaring temp string to store the curr "word" upto del
 	string temp = "";
 	vector<string> splitWords;
 
-	for (int i = 0; i < (int)str.size(); i++)
-	{
+	for (int i = 0; i < (int)str.size(); i++) {
 		// If cur char is not del, then append it to the cur "word", otherwise
 		// you have completed the word, print it, and start a new word.
-		if (str[i] != del)
-		{
+		if (str[i] != del) {
 			temp += str[i];
 		}
-		else
-		{
+		else {
 			splitWords.push_back(temp);
 			temp = "";
 		}
@@ -250,7 +267,8 @@ vector<string> split(const string& str, const char& del) {
 	return splitWords;
 }
 
-int count(const string& str, const char& ch) {
+int count(const string& str, const char& ch)
+{
 	int cnt = 0;
 
 	for (int i = 0; i < (int)str.size(); i++)
@@ -260,23 +278,24 @@ int count(const string& str, const char& ch) {
 	return cnt;
 }
 
-std::vector<int> strPositions(const string& str, const string& sc) {
+std::vector<int> strPositions(const string& str, const string& sc)
+{
 	std::vector<int> outVec = std::vector<int>();
 	int cnt = 0;
 	int c2 = 0;
 	int pos = 0;
-	for (int i = 0; i < (int)str.size(); i++){
-		if (str[i] == sc[c2]){
+	for (int i = 0; i < (int)str.size(); i++) {
+		if (str[i] == sc[c2]) {
 			c2++;
-			if(c2 == (int)sc.size()){
+			if (c2 == (int)sc.size()) {
 				cnt++;
 				c2 = 0;
 				outVec.push_back(pos);
 			}
 		}
-		else{
+		else {
 			c2 = 0;
-			pos = i+1;
+			pos = i + 1;
 		}
 	}
 
@@ -284,18 +303,19 @@ std::vector<int> strPositions(const string& str, const string& sc) {
 }
 
 
-int countStr(const string& str, const string& sc) {
+int countStr(const string& str, const string& sc)
+{
 	int cnt = 0;
 	int c2 = 0;
-	for (int i = 0; i < (int)str.size(); i++){
-		if (str[i] == sc[c2]){
+	for (int i = 0; i < (int)str.size(); i++) {
+		if (str[i] == sc[c2]) {
 			c2++;
-			if(c2 == (int)sc.size()){
+			if (c2 == (int)sc.size()) {
 				cnt++;
 				c2 = 0;
 			}
 		}
-		else{
+		else {
 			c2 = 0;
 		}
 	}
@@ -303,20 +323,21 @@ int countStr(const string& str, const string& sc) {
 	return cnt;
 }
 
-string makeSectionsFromDelim(vector<string> splitStr, const string& sectionStart, const string& sectionEnd, bool startActive){
-	
+string makeSectionsFromDelim(vector<string> splitStr, const string& sectionStart, const string& sectionEnd, bool startActive)
+{
+
 	string outFile = "";
 
-	int numEffect = splitStr.size()+1;
+	int numEffect = splitStr.size() + 1;
 	bool toggleEffect = startActive;
 	//if(startsWith(line, "**"))
 	//	toggleEffect = true;
 	int index = 0;
-	for(string& s : splitStr){
-		if(toggleEffect && index == 0){
+	for (string& s : splitStr) {
+		if (toggleEffect && index == 0) {
 			outFile += sectionStart + s + sectionEnd;
 		}
-		else if(numEffect > 0 && toggleEffect){
+		else if (numEffect > 0 && toggleEffect) {
 			outFile += sectionStart + s + sectionEnd;
 			numEffect--;
 		}
@@ -335,8 +356,7 @@ int countNoOverlap(const string& str, const char& searchFor, const char& ch1, co
 
 	bool waitingForClose = false;
 
-	for (int i = 0; i < (int)str.size(); i++)
-	{
+	for (int i = 0; i < (int)str.size(); i++) {
 		if (str[i] == ch1)
 			waitingForClose = true;
 		else if (str[i] == ch2 && waitingForClose == true)
@@ -355,16 +375,13 @@ vector<string> splitNoOverlap(const string& str, const char& splitBy, const char
 	int openCount = 0;
 
 	string tmpStr = "";
-	for (int i = 0; i < (int)str.size(); i++)
-	{
-		if (i == (int)str.size() - 1)
-		{
+	for (int i = 0; i < (int)str.size(); i++) {
+		if (i == (int)str.size() - 1) {
 			newStr.push_back(trim(tmpStr + str[i]));
 			break;
 		}
 
-		if (str[i] == splitBy && openCount == 0)
-		{
+		if (str[i] == splitBy && openCount == 0) {
 			newStr.push_back(trim(tmpStr));
 			tmpStr = "";
 			continue;
@@ -392,20 +409,19 @@ string firstLevelInDelim(const string& str, const char& openChar, const char& cl
 	int endPos = 0;
 	int level = 0;
 
-	for (int i = startPosition; i < (int)str.size(); i++)
-	{
-		if (str[i] == openChar && level == 0){
-			startPos = i+1;
+	for (int i = startPosition; i < (int)str.size(); i++) {
+		if (str[i] == openChar && level == 0) {
+			startPos = i + 1;
 			level++;
 		}
-		else if (str[i] == openChar){
+		else if (str[i] == openChar) {
 			level++;
 		}
-		else if (str[i] == closeChar && level == 1){
-			endPos = i-startPos;
+		else if (str[i] == closeChar && level == 1) {
+			endPos = i - startPos;
 			break;
 		}
-		else if (str[i] == closeChar){
+		else if (str[i] == closeChar) {
 			level--;
 		}
 	}
@@ -419,17 +435,15 @@ string betweenChars(const string& str, const char& openChar, const char& closeCh
 	int startPos = 0;
 	int endPos = (int)str.size();
 
-	for (int i = 0; i < (int)str.size(); i++)
-	{
-		if (str[i] == openChar){
-			startPos = i+1;
+	for (int i = 0; i < (int)str.size(); i++) {
+		if (str[i] == openChar) {
+			startPos = i + 1;
 			break;
 		}
 	}
-	for (int i = (int)str.size()-1; i >=0; i--)
-	{
-		if (str[i] == closeChar){
-			endPos = i-(startPos); // or startPos-1 idk I cant do math right now
+	for (int i = (int)str.size() - 1; i >= 0; i--) {
+		if (str[i] == closeChar) {
+			endPos = i - (startPos);  // or startPos-1 idk I cant do math right now
 			break;
 		}
 	}
@@ -442,8 +456,7 @@ bool startsWith(const string& str, const string& lookFor)
 	if (str.empty() || lookFor.size() > str.size())
 		return false;
 
-	for (int i = 0; i < (int)lookFor.size(); i++)
-	{
+	for (int i = 0; i < (int)lookFor.size(); i++) {
 		if (str[i] != lookFor[i])
 			return false;
 	}
@@ -451,24 +464,24 @@ bool startsWith(const string& str, const string& lookFor)
 	return true;
 }
 
-int countOutsideDelim(const string& str, const string& sc, const char& delim) {
+int countOutsideDelim(const string& str, const string& sc, const char& delim)
+{
 	int cnt = 0;
 	int c2 = 0;
 	bool waitingForClose = false;
-	for (int i = 0; i < (int)str.size(); i++){
-		if(str[i] == delim)
+	for (int i = 0; i < (int)str.size(); i++) {
+		if (str[i] == delim)
 			waitingForClose = !waitingForClose;
-		
-		else if(!waitingForClose)
-		{
-			if (str[i] == sc[c2]){
+
+		else if (!waitingForClose) {
+			if (str[i] == sc[c2]) {
 				c2++;
-				if(c2 == (int)sc.size()){
+				if (c2 == (int)sc.size()) {
 					cnt++;
 					c2 = 0;
 				}
 			}
-			else{
+			else {
 				c2 = 0;
 			}
 		}
@@ -483,8 +496,7 @@ int countOutsideParenthesis(const string& str, const char& searchFor)
 
 	bool waitingForClose = false;
 
-	for (int i = 0; i < (int)str.size(); i++)
-	{
+	for (int i = 0; i < (int)str.size(); i++) {
 		if (str[i] == '(')
 			waitingForClose = true;
 		else if (str[i] == ')' && waitingForClose == true)
@@ -496,7 +508,8 @@ int countOutsideParenthesis(const string& str, const char& searchFor)
 	return cnt;
 }
 
-int indexInStr(const string& str, const char& ch) {
+int indexInStr(const string& str, const char& ch)
+{
 
 	for (int i = 0; i < (int)str.size(); i++)
 		if (str[i] == ch)
@@ -505,7 +518,8 @@ int indexInStr(const string& str, const char& ch) {
 	return -1;
 }
 
-int charIndexInVec(const vector<string>& str, const char& ch) {
+int charIndexInVec(const vector<string>& str, const char& ch)
+{
 
 	for (int i = 0; i < (int)str.size(); i++)
 		for (int w = 0; w < (int)str[i].size(); w++)
@@ -515,7 +529,8 @@ int charIndexInVec(const vector<string>& str, const char& ch) {
 	return -1;
 }
 
-int countInVector(const vector<string>& str, const string& ch) {
+int countInVector(const vector<string>& str, const string& ch)
+{
 	int cnt = 0;
 
 	for (int i = 0; i < (int)str.size(); i++)
@@ -525,7 +540,8 @@ int countInVector(const vector<string>& str, const string& ch) {
 	return cnt;
 }
 
-string Vec2Str(const vector<string>& str) {
+string Vec2Str(const vector<string>& str)
+{
 	string outStr;
 
 	for (int i = 0; i < (int)str.size(); i++)
@@ -534,15 +550,14 @@ string Vec2Str(const vector<string>& str) {
 	return outStr;
 }
 
-vector<string> removeTabs(const vector<string>& str, const int& amnt) {
+vector<string> removeTabs(const vector<string>& str, const int& amnt)
+{
 	vector<string> newStr;
 
-	for (int i = 0; i < (int)str.size(); i++)
-	{
+	for (int i = 0; i < (int)str.size(); i++) {
 		newStr.push_back("");
 
-		for (int c = 0; c < (int)str[i].size(); c++)
-		{
+		for (int c = 0; c < (int)str[i].size(); c++) {
 			if (str[i][c] != '\t' || c >= amnt)
 				newStr[i] += str[i][c];
 		}
@@ -551,16 +566,15 @@ vector<string> removeTabs(const vector<string>& str, const int& amnt) {
 	return newStr;
 }
 
-vector<vector<string>> removeTabsWdArry(const vector<vector<string>>& str, const int& amnt) {
+vector<vector<string>> removeTabsWdArry(const vector<vector<string>>& str, const int& amnt)
+{
 	vector<vector<string>> newWds;
 
-	for (int i = 0; i < (int)str.size(); i++)
-	{
+	for (int i = 0; i < (int)str.size(); i++) {
 		//newWds.push_back(rangeInVec(str[i], amnt, -1));
 		newWds.push_back(vector<string>());
 
-		for (int c = 0; c < (int)str[i].size(); c++)
-		{
+		for (int c = 0; c < (int)str[i].size(); c++) {
 			if (str[i][c][0] != '\t' || c >= amnt)
 				newWds[i].push_back(str[i][c]);
 			else
@@ -571,7 +585,8 @@ vector<vector<string>> removeTabsWdArry(const vector<vector<string>>& str, const
 	return newWds;
 }
 
-vector<string> rangeInVec(const vector<string>& str, const int& min, int max) {
+vector<string> rangeInVec(const vector<string>& str, const int& min, int max)
+{
 	if (max == -1)
 		max = (int)str.size();
 
@@ -595,7 +610,8 @@ vector<string> slice(vector<string> const& v, int min, int max)
 	return vec;
 }
 
-string rangeInStr(const string& str, const int& min, int max) {
+string rangeInStr(const string& str, const int& min, int max)
+{
 	if (max == -1)
 		max = (int)str.size();
 
@@ -607,11 +623,11 @@ string rangeInStr(const string& str, const int& min, int max) {
 	return newStr;
 }
 
-string unWrapVec(const vector<string>& vec) {
+string unWrapVec(const vector<string>& vec)
+{
 	string newStr;
 
-	for (int i = 0; i < (int)vec.size(); i++)
-	{
+	for (int i = 0; i < (int)vec.size(); i++) {
 		newStr += vec[i];
 		if (i != (int)vec.size() - 1)
 			newStr += " ";
@@ -636,31 +652,28 @@ float floatval(const string& s)
 	return outfloat;
 }
 
-string replace(const string& str, const string& strToReplace, const string& replaceWith) {
+string replace(const string& str, const string& strToReplace, const string& replaceWith)
+{
 	string newStr;
 	string savedLetters;
 
 	int sameLetters = 0;
 	//int startReplaceIndex = 0;
-	for (int i = 0; i < (int)str.size(); i++)
-	{
-		if (str[i] == strToReplace[sameLetters])
-		{
+	for (int i = 0; i < (int)str.size(); i++) {
+		if (str[i] == strToReplace[sameLetters]) {
 			savedLetters += str[i];
 			//if (sameLetters == 0)
 			//	startReplaceIndex = i;
 			sameLetters++;
 
-			if ((int)strToReplace.size() == sameLetters)
-			{
+			if ((int)strToReplace.size() == sameLetters) {
 				//cout << "replaced " << "\"" << strToReplace << "\"" << startReplaceIndex << endl;
 				newStr += replaceWith;
 				sameLetters = 0;
 				savedLetters = "";
 			}
 		}
-		else
-		{
+		else {
 			newStr += savedLetters + str[i];
 			sameLetters = 0;
 			savedLetters = "";
@@ -671,40 +684,38 @@ string replace(const string& str, const string& strToReplace, const string& repl
 }
 
 
-string replaceIfOneWord(const string& str, const string& strToReplace, const string& replaceWith) {
+string replaceIfOneWord(const string& str, const string& strToReplace, const string& replaceWith)
+{
 	string newStr;
 	string savedLetters;
 
 	int sameLetters = 0;
 	//int startReplaceIndex = 0;
-	for (int i = 0; i < (int)str.size(); i++)
-	{
-		if (str[i] == strToReplace[sameLetters])
-		{
+	for (int i = 0; i < (int)str.size(); i++) {
+		if (str[i] == strToReplace[sameLetters]) {
 			savedLetters += str[i];
 			sameLetters++;
 
-			if ((int)strToReplace.size() == sameLetters)
-			{
+			if ((int)strToReplace.size() == sameLetters) {
 				// Also make sure the following character is *not* alphanumeric, or is eol
-				if(i < str.size()-1)
-					if(isalnum(str[i+1]))
-					{ // fail the check for this word, continue
+				if (i < str.size() - 1)
+					if (isalnum(str[i + 1])) {	// fail the check for this word, continue
 						continue;
 					}
 					// If square bracket, get substring
-					else if(str[i+1] == '['){
-						if(isdigit(str[i+2])){
-							int startIndex = i+2;
-							int endIndex = indexInStr(str.substr(i+2, str.size()-1), ']');
+					else if (str[i + 1] == '[') {
+						if (isdigit(str[i + 2])) {
+							int startIndex = i + 2;
+							int endIndex = indexInStr(str.substr(i + 2, str.size() - 1), ']');
 							std::string contents = str.substr(startIndex, endIndex);
-							try{
+							try {
 								newStr += replaceWith.substr(0, stoi(contents));
 								sameLetters = 0;
 								savedLetters = "";
-								i = startIndex+endIndex+1;
+								i = startIndex + endIndex + 1;
 							}
-							catch(...){}
+							catch (...) {
+							}
 							printf("\t %% getting substring from variable \"%s\" => \"%s\"\n", (char*)contents.c_str(), replaceWith.substr(0, stoi(contents)).c_str());
 							printf("\t\trange (%d,%d)\n", startIndex, endIndex);
 							continue;
@@ -716,8 +727,7 @@ string replaceIfOneWord(const string& str, const string& strToReplace, const str
 				savedLetters = "";
 			}
 		}
-		else
-		{
+		else {
 			newStr += savedLetters + str[i];
 			sameLetters = 0;
 			savedLetters = "";

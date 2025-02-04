@@ -14,44 +14,44 @@ RMParenthesis	strops.cpp	/^string RMParenthesis(const string& s)$/;"	f	typeref:t
 STROPS_H	strops.h	/^#define STROPS_H$/;"	d
 SessionLoad	Session.vim	/^let SessionLoad = 1$/;"	v
 StringRaw	strops.cpp	/^string StringRaw(const string& s)$/;"	f	typeref:typename:string
-Vec2Str	strops.cpp	/^string Vec2Str(const vector<string>& str) {$/;"	f	typeref:typename:string
+Vec2Str	strops.cpp	/^string Vec2Str(const vector<string>& str)$/;"	f	typeref:typename:string
 WHITESPACE	strops.cpp	/^const string WHITESPACE = " \\t\\f\\n";$/;"	v	typeref:typename:const string
 betweenChars	strops.cpp	/^string betweenChars(const string& str, const char& openChar, const char& closeChar)$/;"	f	typeref:typename:string
 capitalize	strops.cpp	/^std::string capitalize(const std::string& input)$/;"	f	typeref:typename:std::string
-charIndexInVec	strops.cpp	/^int charIndexInVec(const vector<string>& str, const char& ch) {$/;"	f	typeref:typename:int
-closeList	main.cpp	/^void closeList(string& outFile, bool& openList){$/;"	f	typeref:typename:void
-count	strops.cpp	/^int count(const string& str, const char& ch) {$/;"	f	typeref:typename:int
-countInVector	strops.cpp	/^int countInVector(const vector<string>& str, const string& ch) {$/;"	f	typeref:typename:int
+charIndexInVec	strops.cpp	/^int charIndexInVec(const vector<string>& str, const char& ch)$/;"	f	typeref:typename:int
+closeList	main.cpp	/^void closeList(string& outFile, bool& openList)$/;"	f	typeref:typename:void
+count	strops.cpp	/^int count(const string& str, const char& ch)$/;"	f	typeref:typename:int
+countInVector	strops.cpp	/^int countInVector(const vector<string>& str, const string& ch)$/;"	f	typeref:typename:int
 countNoOverlap	strops.cpp	/^int countNoOverlap(const string& str, const char& searchFor, const char& ch1, const char& ch2)$/;"	f	typeref:typename:int
-countOutsideDelim	strops.cpp	/^int countOutsideDelim(const string& str, const string& sc, const char& delim) {$/;"	f	typeref:typename:int
+countOutsideDelim	strops.cpp	/^int countOutsideDelim(const string& str, const string& sc, const char& delim)$/;"	f	typeref:typename:int
 countOutsideParenthesis	strops.cpp	/^int countOutsideParenthesis(const string& str, const char& searchFor)$/;"	f	typeref:typename:int
-countStr	strops.cpp	/^int countStr(const string& str, const string& sc) {$/;"	f	typeref:typename:int
+countStr	strops.cpp	/^int countStr(const string& str, const string& sc)$/;"	f	typeref:typename:int
 escaped	strops.cpp	/^std::string escaped(const std::string& input)$/;"	f	typeref:typename:std::string
 firstLevelInDelim	strops.cpp	/^string firstLevelInDelim(const string& str, const char& openChar, const char& closeChar, int sta/;"	f	typeref:typename:string
 floatval	strops.cpp	/^float floatval(const string& s)$/;"	f	typeref:typename:float
 fontSizes	main.cpp	/^string fontSizes[] = {"\\\\Huge", "\\\\huge", "\\\\LARGE", "\\\\Large", "\\\\large"};$/;"	v	typeref:typename:string[]
-indexInStr	strops.cpp	/^int indexInStr(const string& str, const char& ch) {$/;"	f	typeref:typename:int
+indexInStr	strops.cpp	/^int indexInStr(const string& str, const char& ch)$/;"	f	typeref:typename:int
 isEscaped	strops.cpp	/^bool isEscaped(const string& str, int curChar)$/;"	f	typeref:typename:bool
 isNumber	strops.cpp	/^bool isNumber(const string& str)$/;"	f	typeref:typename:bool
 ltrim	strops.cpp	/^string ltrim(const string& s)$/;"	f	typeref:typename:string
-main	main.cpp	/^int main(int argc, char** argv){$/;"	f	typeref:typename:int
+main	main.cpp	/^int main(int argc, char** argv)$/;"	f	typeref:typename:int
 makeSectionsFromDelim	strops.cpp	/^string makeSectionsFromDelim(vector<string> splitStr, const string& sectionStart, const string& /;"	f	typeref:typename:string
-processNormalLine	main.cpp	/^void processNormalLine(string& line){$/;"	f	typeref:typename:void
-rangeInStr	strops.cpp	/^string rangeInStr(const string& str, const int& min, int max) {$/;"	f	typeref:typename:string
-rangeInVec	strops.cpp	/^vector<string> rangeInVec(const vector<string>& str, const int& min, int max) {$/;"	f	typeref:typename:vector<string>
-removeTabs	strops.cpp	/^vector<string> removeTabs(const vector<string>& str, const int& amnt) {$/;"	f	typeref:typename:vector<string>
-removeTabsWdArry	strops.cpp	/^vector<vector<string>> removeTabsWdArry(const vector<vector<string>>& str, const int& amnt) {$/;"	f	typeref:typename:vector<vector<string>>
-replace	strops.cpp	/^string replace(const string& str, const string& strToReplace, const string& replaceWith) {$/;"	f	typeref:typename:string
-replaceFuncInstances	main.cpp	/^string replaceFuncInstances(string& str, map<string, string>& functions){$/;"	f	typeref:typename:string
+processNormalLine	main.cpp	/^void processNormalLine(string& line)$/;"	f	typeref:typename:void
+rangeInStr	strops.cpp	/^string rangeInStr(const string& str, const int& min, int max)$/;"	f	typeref:typename:string
+rangeInVec	strops.cpp	/^vector<string> rangeInVec(const vector<string>& str, const int& min, int max)$/;"	f	typeref:typename:vector<string>
+removeTabs	strops.cpp	/^vector<string> removeTabs(const vector<string>& str, const int& amnt)$/;"	f	typeref:typename:vector<string>
+removeTabsWdArry	strops.cpp	/^vector<vector<string>> removeTabsWdArry(const vector<vector<string>>& str, const int& amnt)$/;"	f	typeref:typename:vector<vector<string>>
+replace	strops.cpp	/^string replace(const string& str, const string& strToReplace, const string& replaceWith)$/;"	f	typeref:typename:string
+replaceFuncInstances	main.cpp	/^string replaceFuncInstances(string& str, map<string, string>& functions)$/;"	f	typeref:typename:string
 replaceIfOneWord	strops.cpp	/^string replaceIfOneWord(const string& str, const string& strToReplace, const string& replaceWith/;"	f	typeref:typename:string
-replaceVarInstances	main.cpp	/^string replaceVarInstances(string& str, map<string, string>& vars){$/;"	f	typeref:typename:string
+replaceVarInstances	main.cpp	/^string replaceVarInstances(string& str, map<string, string>& vars)$/;"	f	typeref:typename:string
 rtrim	strops.cpp	/^string rtrim(const string& s)$/;"	f	typeref:typename:string
 s:l	Session.vim	/^let s:l = 1 - ((0 * winheight(0) + 28) \/ 56)$/;"	v
 s:l	Session.vim	/^let s:l = 28 - ((27 * winheight(0) + 28) \/ 56)$/;"	v
-s:l	Session.vim	/^let s:l = 300 - ((13 * winheight(0) + 20) \/ 41)$/;"	v
+s:l	Session.vim	/^let s:l = 304 - ((17 * winheight(0) + 20) \/ 41)$/;"	v
+s:l	Session.vim	/^let s:l = 32 - ((13 * winheight(0) + 7) \/ 14)$/;"	v
 s:l	Session.vim	/^let s:l = 413 - ((45 * winheight(0) + 28) \/ 56)$/;"	v
 s:l	Session.vim	/^let s:l = 48 - ((36 * winheight(0) + 28) \/ 56)$/;"	v
-s:l	Session.vim	/^let s:l = 87 - ((13 * winheight(0) + 7) \/ 14)$/;"	v
 s:save_splitbelow	Session.vim	/^let s:save_splitbelow = &splitbelow$/;"	v
 s:save_splitright	Session.vim	/^let s:save_splitright = &splitright$/;"	v
 s:save_winminheight	Session.vim	/^let s:save_winminheight = &winminheight$/;"	v
@@ -62,13 +62,13 @@ s:sx	Session.vim	/^let s:sx = expand("<sfile>:p:r")."x.vim"$/;"	v
 s:wipebuf	Session.vim	/^  let s:wipebuf = bufnr('%')$/;"	v
 sectionDepths	main.cpp	/^string sectionDepths[] = {"section", "subsection", "subsubsection", "paragraph", "subparagraph"}/;"	v	typeref:typename:string[]
 slice	strops.cpp	/^vector<string> slice(vector<string> const& v, int min, int max)$/;"	f	typeref:typename:vector<string>
-split	strops.cpp	/^vector<string> split(const string& str, const char& del) {$/;"	f	typeref:typename:vector<string>
-split	strops.cpp	/^vector<string> split(const string& str, const string& del) {$/;"	f	typeref:typename:vector<string>
+split	strops.cpp	/^vector<string> split(const string& str, const char& del)$/;"	f	typeref:typename:vector<string>
+split	strops.cpp	/^vector<string> split(const string& str, const string& del)$/;"	f	typeref:typename:vector<string>
 splitNoOverlap	strops.cpp	/^vector<string> splitNoOverlap(const string& str, const char& splitBy, const char& openChar, cons/;"	f	typeref:typename:vector<string>
-splitOutsideDelim	strops.cpp	/^vector<string> splitOutsideDelim(const string& str, const string& del, const char& delim) {$/;"	f	typeref:typename:vector<string>
+splitOutsideDelim	strops.cpp	/^vector<string> splitOutsideDelim(const string& str, const string& del, const char& delim)$/;"	f	typeref:typename:vector<string>
 startsWith	strops.cpp	/^bool startsWith(const string& str, const string& lookFor)$/;"	f	typeref:typename:bool
 stob	strops.cpp	/^bool stob(const string& str)$/;"	f	typeref:typename:bool
-strPositions	strops.cpp	/^std::vector<int> strPositions(const string& str, const string& sc) {$/;"	f	typeref:typename:std::vector<int>
-trim	strops.cpp	/^string trim(const string& s) {$/;"	f	typeref:typename:string
-unWrapVec	strops.cpp	/^string unWrapVec(const vector<string>& vec) {$/;"	f	typeref:typename:string
+strPositions	strops.cpp	/^std::vector<int> strPositions(const string& str, const string& sc)$/;"	f	typeref:typename:std::vector<int>
+trim	strops.cpp	/^string trim(const string& s)$/;"	f	typeref:typename:string
+unWrapVec	strops.cpp	/^string unWrapVec(const vector<string>& vec)$/;"	f	typeref:typename:string
 unescape	strops.cpp	/^string unescape(const string& s)$/;"	f	typeref:typename:string

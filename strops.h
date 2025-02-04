@@ -8,9 +8,6 @@
 using namespace std;
 
 
-
-
-
 bool isNumber(const string& str);
 
 bool stob(const string& str);
